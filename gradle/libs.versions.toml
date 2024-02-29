@@ -1,0 +1,15 @@
+[versions]
+kotlin = "1.9.22"
+serialization = "1.6.3"
+
+[libraries]
+kotlin-compiler = { module = "org.jetbrains.kotlin:kotlin-compiler", version.ref = "kotlin" }
+serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "serialization" }
+serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serialization" }
+
+kotlinCompilerTester = { module = "dev.zacsweers.kctfork:core", version = "0.4.0" }
+
+[plugins]
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+ksp = { id = "com.google.devtools.ksp", version = "1.9.22-1.0.17" }
+serviceloader = { id = "app.softwork.serviceloader", version = "0.0.8" }
