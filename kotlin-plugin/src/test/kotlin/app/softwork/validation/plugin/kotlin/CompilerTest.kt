@@ -7,18 +7,6 @@ import kotlin.test.assertEquals
 class CompilerTest {
 	@Test
 	fun success() {
-		val anno = SourceFile.kotlin(
-			"anno.kt",
-			"""package app.softwork.validation
-
-@Target(AnnotationTarget.PROPERTY)
-annotation class MinLength(val size: Int)
-
-@Target(AnnotationTarget.PROPERTY)
-annotation class MaxLength(val size: Int)
-			""",
-		)
-
 		val source = SourceFile.kotlin(
 			"main.kt",
 			"""import app.softwork.validation.MinLength
@@ -41,7 +29,7 @@ val s: String,
 }
 			""",
 		)
-		val blocks = jvmCompile(anno, source)
+		val blocks = jvmCompile(source)
 		assertEquals(
 """WHEN type=kotlin.Unit origin=IF
   BRANCH
