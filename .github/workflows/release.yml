@@ -2,7 +2,7 @@ name: Release
 
 on:
   release:
-    types:  [ created ]
+    types: [ created ]
 
 concurrency:
   group: release
@@ -15,7 +15,6 @@ jobs:
       contents: read
       pages: write
       id-token: write
-      packages: write
 
     env:
       GRADLE_OPTS: -Dorg.gradle.caching=true
@@ -30,9 +29,8 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/configure-pages@v4
       - uses: gradle/actions/setup-gradle@v3
-
-      - name: Release maven artifacts
-        run: ./gradlew -Pversion=$version publish
+      - name: Publish
+        run: ./gradlew -Pversion=$version -Dorg.gradle.parallel=false --no-configuration-cache publish closeAndReleaseStagingRepository
         env:
           ORG_GRADLE_PROJECT_signingKey: ${{ secrets.SIGNING_PRIVATE_KEY }}
           ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.SIGNING_PASSWORD }}
