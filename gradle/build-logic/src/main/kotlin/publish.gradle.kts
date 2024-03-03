@@ -1,12 +1,6 @@
 plugins {
-    id("java")
     id("maven-publish")
     id("signing")
-}
-
-java {
-    withSourcesJar()
-    withJavadocJar()
 }
 
 publishing {
