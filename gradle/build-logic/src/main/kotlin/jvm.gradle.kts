@@ -10,10 +10,8 @@ kotlin {
 }
 
 publishing {
-    if (name != "gradle-plugin") {
-        publications.register<MavenPublication>("mavenJava") {
-            from(components["java"])
-        }
+    publications.register<MavenPublication>("mavenJava") {
+        from(components["java"])
     }
 }
 
