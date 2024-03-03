@@ -1,3 +1,5 @@
+import org.gradle.api.publish.maven.*
+
 plugins {
     kotlin("multiplatform")
     id("setup")
@@ -37,4 +39,14 @@ kotlin {
     androidNativeX64()
     mingwX64()
     watchosDeviceArm64()
+}
+
+val emptyJar by tasks.registering(Jar::class)
+
+publishing {
+    publications.withType(MavenPublication::class).configureEach {
+        artifact(emptyJar) {
+            classifier = "javadoc"
+        }
+    }
 }
