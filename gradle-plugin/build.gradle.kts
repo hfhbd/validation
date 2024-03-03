@@ -8,6 +8,11 @@ kotlin {
     setup()
 }
 
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
 dependencies {
     implementation(libs.plugins.kotlin.jvm.toDep())
     testImplementation(kotlin("test"))
