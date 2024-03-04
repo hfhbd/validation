@@ -5,11 +5,11 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class CompilerTest {
-	@Test
-	fun success() {
-		val source = SourceFile.kotlin(
-			"main.kt",
-			"""import app.softwork.validation.MinLength
+    @Test
+    fun success() {
+        val source = SourceFile.kotlin(
+            "main.kt",
+            """import app.softwork.validation.MinLength
 import app.softwork.validation.MaxLength
 import kotlin.IllegalArgumentException
 
@@ -28,10 +28,10 @@ val s: String,
     }
 }
 			""",
-		)
-		val blocks = jvmCompile(source)
-		assertEquals(
-"""WHEN type=kotlin.Unit origin=IF
+        )
+        val blocks = jvmCompile(source)
+        assertEquals(
+            """WHEN type=kotlin.Unit origin=IF
   BRANCH
     if: CALL 'public final fun less (arg0: kotlin.Int, arg1: kotlin.Int): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=null
       arg0: CALL 'public open fun <get-length> (): kotlin.Int declared in kotlin.String' type=kotlin.Int origin=null
@@ -45,9 +45,10 @@ val s: String,
         CONST String type=kotlin.String value=", was "
         CALL 'public final fun <get-s> (): kotlin.String declared in <root>.A' type=kotlin.String origin=null
           ${'$'}this: GET_VAR '<this>: <root>.A declared in <root>.A' type=<root>.A origin=null
-""", blocks[0])
-		assertEquals(
-"""WHEN type=kotlin.Unit origin=IF
+""", blocks[0]
+        )
+        assertEquals(
+            """WHEN type=kotlin.Unit origin=IF
   BRANCH
     if: CALL 'public final fun greater (arg0: kotlin.Int, arg1: kotlin.Int): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=null
       arg0: CALL 'public open fun <get-length> (): kotlin.Int declared in kotlin.String' type=kotlin.Int origin=null
@@ -61,7 +62,8 @@ val s: String,
         CONST String type=kotlin.String value=", was "
         CALL 'public final fun <get-s> (): kotlin.String declared in <root>.A' type=kotlin.String origin=null
           ${'$'}this: GET_VAR '<this>: <root>.A declared in <root>.A' type=<root>.A origin=null
-""", blocks[1])
+""", blocks[1]
+        )
 
-	}
+    }
 }
