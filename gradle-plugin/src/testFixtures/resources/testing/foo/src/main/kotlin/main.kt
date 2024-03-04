@@ -10,12 +10,12 @@ fun main(vararg args: String) {
 }
 
 class A(
-    @property:MinLength(2)
-    @property:MaxLength(4)
+    @MinLength(2)
+    @MaxLength(4)
     val a: String,
 
-    @property:MinLength(2)
-    @property:MaxLength(4)
+    @MinLength(2)
+    @MaxLength(4)
     val b: String,
 ) {
     init {

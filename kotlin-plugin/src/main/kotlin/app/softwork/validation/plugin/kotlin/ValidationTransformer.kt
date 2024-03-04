@@ -48,8 +48,11 @@ internal class ValidationTransformer(
 
         return declaration.transformPostfix {
             if (newInitBlock.body.statements.isNotEmpty()) {
-                for (stmt in newInitBlock.body.statements) {
-                    dump?.invoke(stmt.dump())
+                val dump = dump
+                if (dump != null) {
+                    for (stmt in newInitBlock.body.statements) {
+                        dump(stmt.dump())
+                    }
                 }
                 // move generated checks before user init code
                 val previousInitBlocks = declarations.indexOfFirst {
@@ -87,7 +90,7 @@ internal class ValidationTransformer(
     }
 
     private fun IrConstructorCall.addInit(
-        declaration: IrDeclarationBase,
+        declaration: IrProperty,
         declarationName: String,
         comp: IrSimpleFunctionSymbol,
         compHuman: String,
@@ -97,11 +100,14 @@ internal class ValidationTransformer(
 
         with(
             IrBlockBodyBuilder(
-                pluginContext, Scope(unit), UNDEFINED_OFFSET, UNDEFINED_OFFSET
+                context = pluginContext,
+                scope = Scope(unit),
+                startOffset = startOffset,
+                endOffset = endOffset,
             )
         ) {
             val prop = irCall(
-                klass.getPropertyGetter(declarationName)!!
+                declaration.getter!!
             ).apply {
                 dispatchReceiver = irGet(klass.thisReceiver!!)
             }
