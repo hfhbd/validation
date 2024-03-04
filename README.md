@@ -7,8 +7,8 @@ import app.softwork.validation.MinLength
 import app.softwork.validation.MaxLength
 
 class A(
-    @property:MinLength(2)
-    @property:MaxLength(4)
+    @MinLength(inclusive = 2)
+    @MaxLength(inclusive = 4)
     val a: String,
 ) {
     init {
