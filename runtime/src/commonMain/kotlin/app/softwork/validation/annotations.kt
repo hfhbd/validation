@@ -4,8 +4,8 @@ import kotlinx.serialization.*
 
 @SerialInfo
 @Target(AnnotationTarget.PROPERTY)
-public annotation class MinLength(val value: Int)
+public annotation class MinLength(val inclusive: Int)
 
 @SerialInfo
 @Target(AnnotationTarget.PROPERTY)
-public annotation class MaxLength(val value: Int)
+public annotation class MaxLength(val inclusive: Int)
