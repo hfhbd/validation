@@ -1,9 +1,9 @@
 plugins {
-	id("mpp")
+    id("mpp")
 }
 
 kotlin.sourceSets.commonMain {
-	dependencies {
-		api(libs.serialization.core)
-	}
+    dependencies {
+        api(libs.serialization.core)
+    }
 }

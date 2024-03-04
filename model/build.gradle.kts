@@ -1,7 +1,7 @@
 plugins {
-	id("jvm")
+    id("jvm")
 }
 
 dependencies {
-	api(libs.serialization.core)
+    api(libs.serialization.core)
 }
