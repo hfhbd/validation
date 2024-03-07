@@ -14,7 +14,7 @@ import app.softwork.validation.MaxLength
 import kotlin.IllegalArgumentException
 
 class A(
-    @property:MinLength(2)
+    @MinLength(2)
     @property:MaxLength(4)
 val s: String,
 ) {
