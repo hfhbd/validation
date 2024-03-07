@@ -7,7 +7,6 @@ kotlin.compilerOptions {
 }
 
 dependencies {
-    implementation(projects.model)
     compileOnly(libs.kotlin.compiler)
 
     testImplementation(kotlin("test"))
