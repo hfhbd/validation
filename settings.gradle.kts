@@ -30,5 +30,4 @@ enableFeaturePreview("STABLE_CONFIGURATION_CACHE")
 
 include(":gradle-plugin")
 include(":kotlin-plugin")
-include(":model")
 include(":runtime")
