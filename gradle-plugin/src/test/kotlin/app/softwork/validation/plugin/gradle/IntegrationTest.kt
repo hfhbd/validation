@@ -83,7 +83,7 @@ class IntegrationTest {
         return GradleRunner.create()
             .withPluginClasspath()
             .withProjectDir(projectDir.toFile())
-            .withArguments("clean", *tasks, "--configuration-cache")
+            .withArguments("clean", *tasks, "--configuration-cache", "-Dorg.gradle.configureondemand=true")
             .run()
     }
 }
