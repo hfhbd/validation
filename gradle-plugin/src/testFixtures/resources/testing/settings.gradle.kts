@@ -4,6 +4,8 @@ dependencyResolutionManagement {
     }
 }
 
+rootProject.name = "testing"
+
 includeBuild("../../../../../")
 
 include(":foo")
