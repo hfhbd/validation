@@ -1,5 +1,5 @@
 [versions]
-kotlin = "2.0.0-Beta5"
+kotlin = "2.0.0-RC1"
 
 [libraries]
 kotlin-compiler = { module = "org.jetbrains.kotlin:kotlin-compiler", version.ref = "kotlin" }
