@@ -16,14 +16,24 @@ import kotlin.IllegalArgumentException
 class A(
     @MinLength(2)
     @property:MaxLength(4)
-val s: String,
+    val s: String,
+
+    @MinLength(2)
+    @property:MaxLength(4)
+    val d: String?,
 ) {
     init {
-	    if (s.length < 2) {
+	      if (s.length < 2) {
             throw IllegalArgumentException("s.length >= 2, was " + s)
         }
         if (s.length > 4) {
             throw IllegalArgumentException("s.length <= 4, was " + s)
+        }
+        if (d != null && d.length < 2) {
+            throw IllegalArgumentException("d.length >= 2, was " + d)
+        }
+        if (d != null && d.length > 4) {
+            throw IllegalArgumentException("d.length <= 4, was " + d)
         }
     }
 }
