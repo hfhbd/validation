@@ -22,7 +22,7 @@ class A(
     val d: String?,
 ) {
     init {
-	      if (s.length < 2) {
+	    if (s.length < 2) {
             throw IllegalArgumentException("s.length >= 2, was " + s)
         }
         if (s.length > 4) {
