@@ -1,13 +1,16 @@
 package app.softwork.validation.plugin.kotlin
 
 import org.jetbrains.kotlin.backend.common.extensions.*
+import org.jetbrains.kotlin.backend.common.lower.*
 import org.jetbrains.kotlin.fir.extensions.*
 import org.jetbrains.kotlin.ir.*
 import org.jetbrains.kotlin.ir.builders.*
 import org.jetbrains.kotlin.ir.declarations.*
 import org.jetbrains.kotlin.ir.expressions.*
+import org.jetbrains.kotlin.ir.expressions.IrStatementOrigin.Companion.EXCLEQ
 import org.jetbrains.kotlin.ir.symbols.*
 import org.jetbrains.kotlin.ir.symbols.impl.*
+import org.jetbrains.kotlin.ir.types.*
 import org.jetbrains.kotlin.ir.util.*
 import org.jetbrains.kotlin.ir.visitors.*
 
@@ -21,13 +24,12 @@ internal class ValidationTransformer(
     private val illegalArgumentExceptionSymbol = pluginContext.symbols.irBuiltIns.illegalArgumentExceptionSymbol
     private val unit = pluginContext.symbols.irBuiltIns.unitClass
     private val unitType = pluginContext.symbols.irBuiltIns.unitType
+    private val booleanType = pluginContext.symbols.irBuiltIns.booleanType
     private val less =
         pluginContext.symbols.irBuiltIns.lessFunByOperandType[pluginContext.symbols.irBuiltIns.intClass]!!
     private val greater =
         pluginContext.symbols.irBuiltIns.greaterFunByOperandType[pluginContext.symbols.irBuiltIns.intClass]!!
-    private val STRING = pluginContext.irBuiltIns.stringClass
-    private val STRINGType = pluginContext.irBuiltIns.stringType
-    private val length = STRING.getPropertyGetter("length")!!
+    private val STRINGlength = pluginContext.irBuiltIns.stringClass.getPropertyGetter("length")!!
 
     private var newInitBlock: IrAnonymousInitializer? = null
 
@@ -70,7 +72,7 @@ internal class ValidationTransformer(
 
     override fun visitProperty(declaration: IrProperty): IrProperty {
         val type = declaration.getter!!.returnType
-        if (type != STRINGType) {
+        if (!type.isStringClassType()) {
             return declaration
         }
         declaration.getAnnotation(MinLength)?.addInit(
@@ -78,12 +80,14 @@ internal class ValidationTransformer(
             declarationName = declaration.name.asString(),
             comp = less,
             compHuman = ">=",
+            originParam = IrStatementOrigin.LT
         )
         declaration.getAnnotation(MaxLength)?.addInit(
             declaration = declaration,
             declarationName = declaration.name.asString(),
             comp = greater,
             compHuman = "<=",
+            originParam = IrStatementOrigin.GT,
         )
 
         return declaration
@@ -94,6 +98,7 @@ internal class ValidationTransformer(
         declarationName: String,
         comp: IrSimpleFunctionSymbol,
         compHuman: String,
+        originParam: IrStatementOrigin,
     ) {
         val value = getValueArgument(0)!!
         val klass = declaration.parentClassOrNull ?: return
@@ -110,16 +115,34 @@ internal class ValidationTransformer(
                 declaration.getter!!
             ).apply {
                 dispatchReceiver = irGet(klass.thisReceiver!!)
+                origin = IrStatementOrigin.GET_PROPERTY
+            }
+            val isNullable = declaration.getter!!.returnType.isNullable()
+            val checkLength = irCall(comp).apply {
+                putValueArgument(0, irCall(STRINGlength).apply {
+                    dispatchReceiver = prop
+                    origin = IrStatementOrigin.GET_PROPERTY
+                })
+                putValueArgument(1, value)
+                origin = originParam
             }
             val newInitBlock = newInitBlock ?: return@with
             newInitBlock.body.statements += irIfThen(
                 type = unitType,
-                condition = irCall(comp).apply {
-                    putValueArgument(0, irCall(length).apply {
-                        dispatchReceiver = prop
-                    })
-                    putValueArgument(1, value)
-                },
+                condition = if (isNullable) {
+                    irIfThen(
+                        type = booleanType,
+                        condition = irNot(
+                            irEqualsNull(
+                                prop
+                            ),
+                        ),
+                        thenPart = checkLength
+                    ).apply {
+                        origin = IrStatementOrigin.ANDAND
+                        branches.add(irBranch(irTrue(), irFalse()))
+                    }
+                } else checkLength,
                 thenPart = irCall(
                     illegalArgumentExceptionSymbol,
                 ).apply {

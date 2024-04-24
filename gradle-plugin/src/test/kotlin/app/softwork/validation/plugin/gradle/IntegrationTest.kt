@@ -79,6 +79,20 @@ class IntegrationTest {
         assertTrue("""at A.<init>(main.kt:18)""" in buildResult.output)
     }
 
+    @Test
+    fun bNull() {
+        val projectDir = fixtureDir / "resources" / "testing"
+        val buildResult = build(projectDir, ":foo:run", """--args=123""")
+        val result = buildResult.task(":foo:run")!!
+
+        assertEquals(
+            TaskOutcome.FAILED,
+            result.outcome,
+        )
+        assertTrue("""java.lang.IllegalStateException: Should not happen""" in buildResult.output)
+        assertTrue("""at A.<init>(main.kt:22)""" in buildResult.output)
+    }
+
     private fun build(projectDir: Path, vararg tasks: String): BuildResult {
         return GradleRunner.create()
             .withPluginClasspath()
