@@ -7,6 +7,7 @@ import org.jetbrains.kotlin.ir.*
 import org.jetbrains.kotlin.ir.builders.*
 import org.jetbrains.kotlin.ir.declarations.*
 import org.jetbrains.kotlin.ir.expressions.*
+import org.jetbrains.kotlin.ir.expressions.IrStatementOrigin.Companion.EXCLEQ
 import org.jetbrains.kotlin.ir.symbols.*
 import org.jetbrains.kotlin.ir.symbols.impl.*
 import org.jetbrains.kotlin.ir.types.*
@@ -79,12 +80,14 @@ internal class ValidationTransformer(
             declarationName = declaration.name.asString(),
             comp = less,
             compHuman = ">=",
+            originParam = IrStatementOrigin.LT
         )
         declaration.getAnnotation(MaxLength)?.addInit(
             declaration = declaration,
             declarationName = declaration.name.asString(),
             comp = greater,
             compHuman = "<=",
+            originParam = IrStatementOrigin.GT,
         )
 
         return declaration
@@ -95,6 +98,7 @@ internal class ValidationTransformer(
         declarationName: String,
         comp: IrSimpleFunctionSymbol,
         compHuman: String,
+        originParam: IrStatementOrigin,
     ) {
         val value = getValueArgument(0)!!
         val klass = declaration.parentClassOrNull ?: return
@@ -117,8 +121,10 @@ internal class ValidationTransformer(
             val checkLength = irCall(comp).apply {
                 putValueArgument(0, irCall(STRINGlength).apply {
                     dispatchReceiver = prop
+                    origin = IrStatementOrigin.GET_PROPERTY
                 })
                 putValueArgument(1, value)
+                origin = originParam
             }
             val newInitBlock = newInitBlock ?: return@with
             newInitBlock.body.statements += irIfThen(
