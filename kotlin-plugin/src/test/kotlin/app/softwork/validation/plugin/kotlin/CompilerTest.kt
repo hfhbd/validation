@@ -10,7 +10,7 @@ class CompilerTest {
             "main.kt",
             """import app.softwork.validation.MinLength
 import app.softwork.validation.MaxLength
-import kotlin.IllegalArgumentException
+import app.softwork.validation.ValidationException
 
 class A(
     @MinLength(2)
@@ -23,16 +23,16 @@ class A(
 ) {
     init {
 	    if (s.length < 2) {
-            throw IllegalArgumentException("s.length >= 2, was " + s)
+            throw ValidationException("s.length >= 2, was " + s)
         }
         if (s.length > 4) {
-            throw IllegalArgumentException("s.length <= 4, was " + s)
+            throw ValidationException("s.length <= 4, was " + s)
         }
         if (d != null && d.length < 2) {
-            throw IllegalArgumentException("d.length >= 2, was " + d)
+            throw ValidationException("d.length >= 2, was " + d)
         }
         if (d != null && d.length > 4) {
-            throw IllegalArgumentException("d.length <= 4, was " + d)
+            throw ValidationException("d.length <= 4, was " + d)
         }
     }
 }
@@ -49,13 +49,14 @@ class A(
         ${'$'}this: CALL 'public final fun <get-s> (): kotlin.String declared in <root>.A' type=kotlin.String origin=GET_PROPERTY
           ${'$'}this: GET_VAR '<this>: <root>.A declared in <root>.A' type=<root>.A origin=null
       arg1: CONST Int type=kotlin.Int value=2
-    then: CALL 'public final fun illegalArgumentException (arg0: kotlin.String): kotlin.Nothing declared in kotlin.internal.ir' type=kotlin.Nothing origin=null
-      arg0: STRING_CONCATENATION type=kotlin.String
-        CONST String type=kotlin.String value="s.length >= "
-        CONST Int type=kotlin.Int value=2
-        CONST String type=kotlin.String value=", was "
-        CALL 'public final fun <get-s> (): kotlin.String declared in <root>.A' type=kotlin.String origin=GET_PROPERTY
-          ${'$'}this: GET_VAR '<this>: <root>.A declared in <root>.A' type=<root>.A origin=null
+    then: THROW type=kotlin.Nothing
+      CONSTRUCTOR_CALL 'public constructor <init> (message: kotlin.String) [primary] declared in app.softwork.validation.ValidationException' type=app.softwork.validation.ValidationException origin=null
+        message: STRING_CONCATENATION type=kotlin.String
+          CONST String type=kotlin.String value="s.length >= "
+          CONST Int type=kotlin.Int value=2
+          CONST String type=kotlin.String value=", was "
+          CALL 'public final fun <get-s> (): kotlin.String declared in <root>.A' type=kotlin.String origin=GET_PROPERTY
+            ${'$'}this: GET_VAR '<this>: <root>.A declared in <root>.A' type=<root>.A origin=null
 """,
             blocks[0]
         )
@@ -67,13 +68,14 @@ class A(
         ${'$'}this: CALL 'public final fun <get-s> (): kotlin.String declared in <root>.A' type=kotlin.String origin=GET_PROPERTY
           ${'$'}this: GET_VAR '<this>: <root>.A declared in <root>.A' type=<root>.A origin=null
       arg1: CONST Int type=kotlin.Int value=4
-    then: CALL 'public final fun illegalArgumentException (arg0: kotlin.String): kotlin.Nothing declared in kotlin.internal.ir' type=kotlin.Nothing origin=null
-      arg0: STRING_CONCATENATION type=kotlin.String
-        CONST String type=kotlin.String value="s.length <= "
-        CONST Int type=kotlin.Int value=4
-        CONST String type=kotlin.String value=", was "
-        CALL 'public final fun <get-s> (): kotlin.String declared in <root>.A' type=kotlin.String origin=GET_PROPERTY
-          ${'$'}this: GET_VAR '<this>: <root>.A declared in <root>.A' type=<root>.A origin=null
+    then: THROW type=kotlin.Nothing
+      CONSTRUCTOR_CALL 'public constructor <init> (message: kotlin.String) [primary] declared in app.softwork.validation.ValidationException' type=app.softwork.validation.ValidationException origin=null
+        message: STRING_CONCATENATION type=kotlin.String
+          CONST String type=kotlin.String value="s.length <= "
+          CONST Int type=kotlin.Int value=4
+          CONST String type=kotlin.String value=", was "
+          CALL 'public final fun <get-s> (): kotlin.String declared in <root>.A' type=kotlin.String origin=GET_PROPERTY
+            ${'$'}this: GET_VAR '<this>: <root>.A declared in <root>.A' type=<root>.A origin=null
 """,
             blocks[1]
         )
@@ -95,13 +97,14 @@ class A(
       BRANCH
         if: CONST Boolean type=kotlin.Boolean value=true
         then: CONST Boolean type=kotlin.Boolean value=false
-    then: CALL 'public final fun illegalArgumentException (arg0: kotlin.String): kotlin.Nothing declared in kotlin.internal.ir' type=kotlin.Nothing origin=null
-      arg0: STRING_CONCATENATION type=kotlin.String
-        CONST String type=kotlin.String value="d.length >= "
-        CONST Int type=kotlin.Int value=2
-        CONST String type=kotlin.String value=", was "
-        CALL 'public final fun <get-d> (): kotlin.String? declared in <root>.A' type=kotlin.String? origin=GET_PROPERTY
-          ${'$'}this: GET_VAR '<this>: <root>.A declared in <root>.A' type=<root>.A origin=null
+    then: THROW type=kotlin.Nothing
+      CONSTRUCTOR_CALL 'public constructor <init> (message: kotlin.String) [primary] declared in app.softwork.validation.ValidationException' type=app.softwork.validation.ValidationException origin=null
+        message: STRING_CONCATENATION type=kotlin.String
+          CONST String type=kotlin.String value="d.length >= "
+          CONST Int type=kotlin.Int value=2
+          CONST String type=kotlin.String value=", was "
+          CALL 'public final fun <get-d> (): kotlin.String? declared in <root>.A' type=kotlin.String? origin=GET_PROPERTY
+            ${'$'}this: GET_VAR '<this>: <root>.A declared in <root>.A' type=<root>.A origin=null
 """,
             blocks[2]
         )
@@ -123,13 +126,14 @@ class A(
       BRANCH
         if: CONST Boolean type=kotlin.Boolean value=true
         then: CONST Boolean type=kotlin.Boolean value=false
-    then: CALL 'public final fun illegalArgumentException (arg0: kotlin.String): kotlin.Nothing declared in kotlin.internal.ir' type=kotlin.Nothing origin=null
-      arg0: STRING_CONCATENATION type=kotlin.String
-        CONST String type=kotlin.String value="d.length <= "
-        CONST Int type=kotlin.Int value=4
-        CONST String type=kotlin.String value=", was "
-        CALL 'public final fun <get-d> (): kotlin.String? declared in <root>.A' type=kotlin.String? origin=GET_PROPERTY
-          ${'$'}this: GET_VAR '<this>: <root>.A declared in <root>.A' type=<root>.A origin=null
+    then: THROW type=kotlin.Nothing
+      CONSTRUCTOR_CALL 'public constructor <init> (message: kotlin.String) [primary] declared in app.softwork.validation.ValidationException' type=app.softwork.validation.ValidationException origin=null
+        message: STRING_CONCATENATION type=kotlin.String
+          CONST String type=kotlin.String value="d.length <= "
+          CONST Int type=kotlin.Int value=4
+          CONST String type=kotlin.String value=", was "
+          CALL 'public final fun <get-d> (): kotlin.String? declared in <root>.A' type=kotlin.String? origin=GET_PROPERTY
+            ${'$'}this: GET_VAR '<this>: <root>.A declared in <root>.A' type=<root>.A origin=null
 """,
             blocks[3]
         )

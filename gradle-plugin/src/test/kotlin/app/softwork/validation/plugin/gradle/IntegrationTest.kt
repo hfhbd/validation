@@ -33,7 +33,7 @@ class IntegrationTest {
             TaskOutcome.FAILED,
             result.outcome,
         )
-        assertTrue("""java.lang.IllegalArgumentException: a.length >= 2, was 1""" in buildResult.output)
+        assertTrue("""app.softwork.validation.ValidationException: a.length >= 2, was 1""" in buildResult.output)
         assertTrue("""at A.<init>(main.kt:13)""" in buildResult.output)
     }
 
@@ -47,7 +47,7 @@ class IntegrationTest {
             TaskOutcome.FAILED,
             result.outcome,
         )
-        assertTrue("""java.lang.IllegalArgumentException: a.length <= 4, was 123456""" in buildResult.output)
+        assertTrue("""app.softwork.validation.ValidationException: a.length <= 4, was 123456""" in buildResult.output)
         assertTrue("""at A.<init>(main.kt:14)""" in buildResult.output)
     }
 
@@ -61,7 +61,7 @@ class IntegrationTest {
             TaskOutcome.FAILED,
             result.outcome,
         )
-        assertTrue("""java.lang.IllegalArgumentException: b.length >= 2, was a""" in buildResult.output)
+        assertTrue("""app.softwork.validation.ValidationException: b.length >= 2, was a""" in buildResult.output)
         assertTrue("""at A.<init>(main.kt:17)""" in buildResult.output)
     }
 
@@ -75,7 +75,7 @@ class IntegrationTest {
             TaskOutcome.FAILED,
             result.outcome,
         )
-        assertTrue("""java.lang.IllegalArgumentException: b.length <= 4, was abcdef""" in buildResult.output)
+        assertTrue("""app.softwork.validation.ValidationException: b.length <= 4, was abcdef""" in buildResult.output)
         assertTrue("""at A.<init>(main.kt:18)""" in buildResult.output)
     }
 
