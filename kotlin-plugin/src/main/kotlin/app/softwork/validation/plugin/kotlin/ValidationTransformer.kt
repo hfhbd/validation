@@ -7,12 +7,12 @@ import org.jetbrains.kotlin.ir.*
 import org.jetbrains.kotlin.ir.builders.*
 import org.jetbrains.kotlin.ir.declarations.*
 import org.jetbrains.kotlin.ir.expressions.*
-import org.jetbrains.kotlin.ir.expressions.IrStatementOrigin.Companion.EXCLEQ
 import org.jetbrains.kotlin.ir.symbols.*
 import org.jetbrains.kotlin.ir.symbols.impl.*
 import org.jetbrains.kotlin.ir.types.*
 import org.jetbrains.kotlin.ir.util.*
 import org.jetbrains.kotlin.ir.visitors.*
+import org.jetbrains.kotlin.name.*
 
 internal class ValidationTransformer(
     private val pluginContext: IrPluginContext,
@@ -21,7 +21,8 @@ internal class ValidationTransformer(
 
     private val MinLength = AnnotationFqn("app.softwork.validation.MinLength")
     private val MaxLength = AnnotationFqn("app.softwork.validation.MaxLength")
-    private val illegalArgumentExceptionSymbol = pluginContext.symbols.irBuiltIns.illegalArgumentExceptionSymbol
+    private val validationExceptionSymbol: IrClassSymbol =
+        pluginContext.referenceClass(ClassId(FqName("app.softwork.validation"), FqName("ValidationException"), false))!!
     private val unit = pluginContext.symbols.irBuiltIns.unitClass
     private val unitType = pluginContext.symbols.irBuiltIns.unitType
     private val booleanType = pluginContext.symbols.irBuiltIns.booleanType
@@ -143,8 +144,14 @@ internal class ValidationTransformer(
                         branches.add(irBranch(irTrue(), irFalse()))
                     }
                 } else checkLength,
-                thenPart = irCall(
-                    illegalArgumentExceptionSymbol,
+                thenPart = irThrow(irCallConstructor(
+                    validationExceptionSymbol.constructors.first {
+                        if (it.owner.valueParameters.size == 1) {
+                            val singleParameter = it.owner.valueParameters.single()
+                            singleParameter.type.isString()
+                        } else false
+                    },
+                    emptyList(),
                 ).apply {
                     putValueArgument(0, irConcat().apply {
                         arguments += irString("$declarationName.length $compHuman ")
@@ -153,7 +160,7 @@ internal class ValidationTransformer(
                         arguments += prop
                     })
                 },
-            ).apply {
+            )).apply {
                 origin = IrStatementOrigin.IF
             }
         }
