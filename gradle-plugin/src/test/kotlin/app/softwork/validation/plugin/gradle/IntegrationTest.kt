@@ -21,6 +21,8 @@ class IntegrationTest {
         )
         assertTrue("""java.lang.IllegalStateException: Should not happen""" in buildResult.output)
         assertTrue("""at A.<init>(main.kt:22)""" in buildResult.output)
+
+        assertEquals(TaskOutcome.SUCCESS, buildResult.task(":foo:compileTestFixturesKotlin")?.outcome)
     }
 
     @Test
@@ -97,7 +99,7 @@ class IntegrationTest {
         return GradleRunner.create()
             .withPluginClasspath()
             .withProjectDir(projectDir.toFile())
-            .withArguments("clean", *tasks, "--configuration-cache", "-Dorg.gradle.configureondemand=true")
+            .withArguments("clean", "build", *tasks, "--configuration-cache", "-Dorg.gradle.configureondemand=true")
             .run()
     }
 }

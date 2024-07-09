@@ -21,8 +21,8 @@ internal class ValidationTransformer(
 
     private val MinLength = AnnotationFqn("app.softwork.validation.MinLength")
     private val MaxLength = AnnotationFqn("app.softwork.validation.MaxLength")
-    private val validationExceptionSymbol: IrClassSymbol =
-        pluginContext.referenceClass(ClassId(FqName("app.softwork.validation"), FqName("ValidationException"), false))!!
+    private val validationExceptionSymbol: IrClassSymbol? =
+        pluginContext.referenceClass(ClassId(FqName("app.softwork.validation"), FqName("ValidationException"), false))
     private val unit = pluginContext.symbols.irBuiltIns.unitClass
     private val unitType = pluginContext.symbols.irBuiltIns.unitType
     private val booleanType = pluginContext.symbols.irBuiltIns.booleanType
@@ -145,7 +145,7 @@ internal class ValidationTransformer(
                     }
                 } else checkLength,
                 thenPart = irThrow(irCallConstructor(
-                    validationExceptionSymbol.constructors.first {
+                    validationExceptionSymbol!!.constructors.first {
                         if (it.owner.valueParameters.size == 1) {
                             val singleParameter = it.owner.valueParameters.single()
                             singleParameter.type.isString()
