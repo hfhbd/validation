@@ -15,8 +15,6 @@ fun jvmCompile(vararg files: SourceFile): List<String> {
             sources = files.toList()
             compilerPluginRegistrars = listOf(ValidationCompilerPluginRegistrarTest(dumps::add))
             inheritClassPath = true
-            supportsK2 = true
-            languageVersion = "2.0"
         }
         .compile()
     assertEquals(ExitCode.OK, result.exitCode)
