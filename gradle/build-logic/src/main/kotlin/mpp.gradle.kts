@@ -9,7 +9,7 @@ kotlin {
     setup()
 
     jvm()
-    js(IR) {
+    js {
         browser()
         nodejs()
     }
