@@ -13,14 +13,18 @@ public class ValidationPlugin : KotlinCompilerPluginSupportPlugin {
 
         target.plugins.withId("org.jetbrains.kotlin.multiplatform") {
             val kotlin = target.extensions.getByType(KotlinMultiplatformExtension::class.java)
-            kotlin.sourceSets.getByName(COMMON_MAIN_SOURCE_SET_NAME).dependencies {
-                implementation(runtimeDependency())
+            kotlin.sourceSets.configureEach {
+                dependencies {
+                    implementation(runtimeDependency())
+                }
             }
         }
         target.plugins.withId("org.jetbrains.kotlin.jvm") {
             val kotlin = target.extensions.getByType(KotlinJvmProjectExtension::class.java)
-            kotlin.sourceSets.getByName(MAIN_SOURCE_SET_NAME).dependencies {
-                implementation(runtimeDependency())
+            kotlin.sourceSets.configureEach {
+                dependencies {
+                    implementation(runtimeDependency())
+                }
             }
         }
     }
@@ -31,13 +35,11 @@ public class ValidationPlugin : KotlinCompilerPluginSupportPlugin {
 
     override fun getCompilerPluginId(): String = "app.softwork.validation"
 
-    override fun getPluginArtifact(): SubpluginArtifact {
-        return SubpluginArtifact(
-            groupId = "app.softwork.validation",
-            artifactId = "kotlin-plugin",
-            version = VERSION,
-        )
-    }
+    override fun getPluginArtifact(): SubpluginArtifact = SubpluginArtifact(
+        groupId = "app.softwork.validation",
+        artifactId = "kotlin-plugin",
+        version = VERSION,
+    )
 
     override fun applyToCompilation(kotlinCompilation: KotlinCompilation<*>): Provider<List<SubpluginOption>> =
         kotlinCompilation.project.providers.provider { emptyList() }
