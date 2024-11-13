@@ -55,4 +55,8 @@ tasks.pluginUnderTestMetadata {
 
 tasks.test {
     environment("fixtureDir", project.file("src/testFixtures").path)
+
+    javaLauncher.set(javaToolchains.launcherFor {
+        languageVersion.set(JavaLanguageVersion.of(21))
+    })
 }
