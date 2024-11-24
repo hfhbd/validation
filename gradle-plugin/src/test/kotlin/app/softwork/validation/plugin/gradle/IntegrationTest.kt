@@ -13,11 +13,11 @@ class IntegrationTest {
     fun success() {
         val projectDir = fixtureDir / "resources" / "testing"
         val buildResult = build(projectDir, ":foo:run", """--args=123 abcd""")
-        val result = buildResult.task(":foo:run")!!
+        val result = buildResult.task(":foo:run")
 
         assertEquals(
             TaskOutcome.FAILED,
-            result.outcome,
+            result?.outcome,
         )
         assertTrue("""java.lang.IllegalStateException: Should not happen""" in buildResult.output)
         assertTrue("""at A.<init>(main.kt:22)""" in buildResult.output)
@@ -29,11 +29,11 @@ class IntegrationTest {
     fun aTooShort() {
         val projectDir = fixtureDir / "resources" / "testing"
         val buildResult = build(projectDir, ":foo:run", """--args=1 abcd""")
-        val result = buildResult.task(":foo:run")!!
+        val result = buildResult.task(":foo:run")
 
         assertEquals(
             TaskOutcome.FAILED,
-            result.outcome,
+            result?.outcome,
         )
         assertTrue("""app.softwork.validation.ValidationException: a.length >= 2, was 1""" in buildResult.output)
         assertTrue("""at A.<init>(main.kt:13)""" in buildResult.output)
@@ -43,11 +43,11 @@ class IntegrationTest {
     fun aTooLong() {
         val projectDir = fixtureDir / "resources" / "testing"
         val buildResult = build(projectDir, ":foo:run", """--args=123456 abcd""")
-        val result = buildResult.task(":foo:run")!!
+        val result = buildResult.task(":foo:run")
 
         assertEquals(
             TaskOutcome.FAILED,
-            result.outcome,
+            result?.outcome,
         )
         assertTrue("""app.softwork.validation.ValidationException: a.length <= 4, was 123456""" in buildResult.output)
         assertTrue("""at A.<init>(main.kt:14)""" in buildResult.output)
@@ -57,11 +57,11 @@ class IntegrationTest {
     fun bTooShort() {
         val projectDir = fixtureDir / "resources" / "testing"
         val buildResult = build(projectDir, ":foo:run", """--args=123 a""")
-        val result = buildResult.task(":foo:run")!!
+        val result = buildResult.task(":foo:run")
 
         assertEquals(
             TaskOutcome.FAILED,
-            result.outcome,
+            result?.outcome,
         )
         assertTrue("""app.softwork.validation.ValidationException: b.length >= 2, was a""" in buildResult.output)
         assertTrue("""at A.<init>(main.kt:17)""" in buildResult.output)
@@ -71,11 +71,11 @@ class IntegrationTest {
     fun bTooLong() {
         val projectDir = fixtureDir / "resources" / "testing"
         val buildResult = build(projectDir, ":foo:run", """--args=123 abcdef""")
-        val result = buildResult.task(":foo:run")!!
+        val result = buildResult.task(":foo:run")
 
         assertEquals(
             TaskOutcome.FAILED,
-            result.outcome,
+            result?.outcome,
         )
         assertTrue("""app.softwork.validation.ValidationException: b.length <= 4, was abcdef""" in buildResult.output)
         assertTrue("""at A.<init>(main.kt:18)""" in buildResult.output)
@@ -85,11 +85,11 @@ class IntegrationTest {
     fun bNull() {
         val projectDir = fixtureDir / "resources" / "testing"
         val buildResult = build(projectDir, ":foo:run", """--args=123""")
-        val result = buildResult.task(":foo:run")!!
+        val result = buildResult.task(":foo:run")
 
         assertEquals(
             TaskOutcome.FAILED,
-            result.outcome,
+            result?.outcome,
         )
         assertTrue("""java.lang.IllegalStateException: Should not happen""" in buildResult.output)
         assertTrue("""at A.<init>(main.kt:22)""" in buildResult.output)
@@ -98,6 +98,7 @@ class IntegrationTest {
     private fun build(projectDir: Path, vararg tasks: String): BuildResult {
         return GradleRunner.create()
             .withPluginClasspath()
+            .forwardOutput()
             .withProjectDir(projectDir.toFile())
             .withArguments("clean", "build", *tasks, "--configuration-cache", "-Dorg.gradle.configureondemand=true")
             .run()
