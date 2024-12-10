@@ -9,6 +9,6 @@ kotlinCompilerTester = { module = "dev.zacsweers.kctfork:core", version = "0.7.0
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
-serviceloader = { id = "app.softwork.serviceloader-compiler", version = "0.0.14" }
+serviceloader = { id = "app.softwork.serviceloader-compiler", version = "0.0.15" }
 publish = { id = "io.github.gradle-nexus.publish-plugin", version = "2.0.0" }
 dokka = { id = "org.jetbrains.dokka", version = "1.9.20" }
