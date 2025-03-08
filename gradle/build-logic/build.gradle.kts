@@ -5,7 +5,7 @@ plugins {
 dependencies {
     implementation(libs.plugins.kotlin.jvm.toDep())
     implementation(libs.plugins.serviceloader.toDep())
-    implementation(libs.plugins.publish.toDep())
+    implementation(libs.plugins.mavencentral.toDep())
     implementation(libs.plugins.dokka.toDep())
 }
 
