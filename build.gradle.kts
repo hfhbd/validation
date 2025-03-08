@@ -2,6 +2,14 @@ plugins {
     id("org.jetbrains.dokka")
 }
 
-tasks.dokkaHtmlMultiModule {
-    includes.from("README.md")
+dependencies {
+    for (sub in subprojects) {
+        dokka(sub)
+    }
+}
+
+dokka {
+    dokkaPublications.configureEach {
+        includes.from("README.md")
+    }
 }
