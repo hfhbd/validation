@@ -9,8 +9,15 @@ kotlin {
     setup()
 
     jvm()
+
     js {
         browser()
+        nodejs()
+    }
+    wasmJs {
+        nodejs()
+    }
+    wasmWasi {
         nodejs()
     }
 
