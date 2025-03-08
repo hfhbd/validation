@@ -5,14 +5,18 @@ plugins {
     id("org.jetbrains.dokka")
 }
 
-tasks.named<DokkaTaskPartial>("dokkaHtmlPartial") {
+dokka {
+    val module = project.name
     dokkaSourceSets.configureEach {
-        externalDocumentationLink("https://cashapp.github.io/sqldelight/2.0.0/2.x/")
-        externalDocumentationLink(
-            url = "https://kotlinlang.org/api/kotlinx-datetime/",
-            packageListUrl = "https://kotlinlang.org/api/kotlinx-datetime/kotlinx-datetime/package-list",
-        )
-        externalDocumentationLink("https://uuid.softwork.app")
-        externalDocumentationLink("https://kotlinlang.org/api/kotlinx.coroutines/")
+        reportUndocumented.set(true)
+        includes.from("README.md")
+        val sourceSetName = name
+        File("$module/src/$sourceSetName").takeIf { it.exists() }?.let {
+            sourceLink {
+                localDirectory.set(file("src/$sourceSetName/kotlin"))
+                remoteUrl.set(uri("https://github.com/hfhbd/validation/tree/main/$module/src/$sourceSetName/kotlin"))
+                remoteLineSuffix.set("#L")
+            }
+        }
     }
 }

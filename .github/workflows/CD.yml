@@ -1,30 +1,25 @@
-name: Release
+name: CD
 
 on:
   release:
     types: [ created ]
 
 concurrency:
-  group: release
+  group: "cd"
   cancel-in-progress: false
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pages: write
-      id-token: write
 
     environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      name: CD
 
     steps:
       - name: Set environment for version
-        run: echo "version=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
+        id: version
+        run: long="${{ github.ref }}"; version=${long#"refs/tags/v"}; echo "version=${version}" >> $GITHUB_OUTPUT
       - uses: actions/checkout@v4
-      - uses: actions/configure-pages@v5
       - uses: gradle/actions/setup-gradle@v4
 
       - name: Publish
@@ -34,12 +29,3 @@ jobs:
           ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.SIGNING_PASSWORD }}
           ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.CENTRAL_USERNAME }}
           ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.CENTRAL_PASSWORD }}
-
-      - name: Create docs
-        run: ./gradlew :dokkaHtmlMultiModule --no-configuration-cache
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: build/dokka/htmlMultiModule
-      - name: Deploy Documentation to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4

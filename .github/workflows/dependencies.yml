@@ -15,16 +15,14 @@ jobs:
       contents: write
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Generate and submit dependency graph
-      uses: gradle/actions/dependency-submission@v4
+      - uses: actions/checkout@v4
+      - name: Generate and submit dependency graph
+        uses: gradle/actions/dependency-submission@v4
 
   dependency-review:
     runs-on: ubuntu-24.04-arm
     needs: dependency-submission
     if: github.event_name == 'pull_request'
     steps:
-    - name: Perform dependency review
-      uses: actions/dependency-review-action@v4
-      with:
-        allow-licenses: Apache-2.0
+      - name: Perform dependency review
+        uses: actions/dependency-review-action@v4
