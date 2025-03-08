@@ -16,9 +16,6 @@ jobs:
       pages: write
       id-token: write
 
-    env:
-      GRADLE_OPTS: -Dorg.gradle.caching=true
-
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -31,12 +28,12 @@ jobs:
       - uses: gradle/actions/setup-gradle@v4
 
       - name: Publish
-        run: ./gradlew -Pversion=$version -Dorg.gradle.parallel=false --no-configuration-cache publish closeAndReleaseStagingRepositories
+        run: ./gradlew -Pversion=${{ steps.version.outputs.version }} publish
         env:
           ORG_GRADLE_PROJECT_signingKey: ${{ secrets.SIGNING_PRIVATE_KEY }}
           ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.SIGNING_PASSWORD }}
-          ORG_GRADLE_PROJECT_sonatypeUsername: ${{ secrets.SONARTYPE_APIKEY }}
-          ORG_GRADLE_PROJECT_sonatypePassword: ${{ secrets.SONARTYPE_APITOKEN }}
+          ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.CENTRAL_USERNAME }}
+          ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.CENTRAL_PASSWORD }}
 
       - name: Create docs
         run: ./gradlew :dokkaHtmlMultiModule --no-configuration-cache

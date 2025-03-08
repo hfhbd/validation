@@ -9,8 +9,6 @@ import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet.Companion.COMMON_MAIN_
 
 public class ValidationPlugin : KotlinCompilerPluginSupportPlugin {
     override fun apply(target: Project) {
-        super.apply(target)
-
         target.plugins.withId("org.jetbrains.kotlin.multiplatform") {
             val kotlin = target.extensions.getByType(KotlinMultiplatformExtension::class.java)
             kotlin.sourceSets.configureEach {
