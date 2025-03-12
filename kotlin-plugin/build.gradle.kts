@@ -13,4 +13,5 @@ dependencies {
     testImplementation(libs.kotlinCompilerTester)
     testImplementation(libs.kotlin.compiler.embeddable)
     testImplementation(projects.runtime)
+    testImplementation(libs.serialization.core)
 }

@@ -21,6 +21,8 @@ internal class ValidationTransformer(
 
     private val MinLength = AnnotationFqn("app.softwork.validation.MinLength")
     private val MaxLength = AnnotationFqn("app.softwork.validation.MaxLength")
+    private val SerialName = AnnotationFqn("kotlinx.serialization.SerialName")
+
     private val validationExceptionSymbol: IrClassSymbol? =
         pluginContext.referenceClass(ClassId(FqName("app.softwork.validation"), FqName("ValidationException"), false))
     private val unit = pluginContext.symbols.irBuiltIns.unitClass
@@ -72,26 +74,26 @@ internal class ValidationTransformer(
     }
 
     override fun visitProperty(declaration: IrProperty): IrProperty {
-        val type = declaration.getter!!.returnType
-        if (!type.isStringClassType()) {
-            return declaration
-        }
         declaration.getAnnotation(MinLength)?.addInit(
             declaration = declaration,
-            declarationName = declaration.name.asString(),
+            declarationName = declaration.getSerialName() ?: declaration.name.asString(),
             comp = less,
             compHuman = ">=",
             originParam = IrStatementOrigin.LT
         )
         declaration.getAnnotation(MaxLength)?.addInit(
             declaration = declaration,
-            declarationName = declaration.name.asString(),
+            declarationName = declaration.getSerialName() ?: declaration.name.asString(),
             comp = greater,
             compHuman = "<=",
             originParam = IrStatementOrigin.GT,
         )
 
         return declaration
+    }
+
+    private fun IrProperty.getSerialName(): String? {
+        return getAnnotation(SerialName)?.getAnnotationStringValue()
     }
 
     private fun IrConstructorCall.addInit(
