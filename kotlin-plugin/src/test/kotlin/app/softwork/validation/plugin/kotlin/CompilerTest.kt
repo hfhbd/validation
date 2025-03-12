@@ -143,6 +143,46 @@ class A(
     }
 
     @Test
+    fun serialName() {
+        val source = SourceFile.kotlin(
+            "main.kt",
+            """import app.softwork.validation.MinLength
+import kotlinx.serialization.SerialName
+
+class A(
+    @MinLength(2)
+    @SerialName("foo")
+    val s: String,
+)
+			""",
+        )
+
+        val blocks = jvmCompile(source) { result ->
+            assertEquals(ExitCode.OK, result.exitCode)
+        }
+        assertEquals(1, blocks.size)
+        assertEquals(
+            """WHEN type=kotlin.Unit origin=IF
+  BRANCH
+    if: CALL 'public final fun less (arg0: kotlin.Int, arg1: kotlin.Int): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=LT
+      arg0: CALL 'public open fun <get-length> (): kotlin.Int declared in kotlin.String' type=kotlin.Int origin=GET_PROPERTY
+        ${'$'}this: CALL 'public final fun <get-s> (): kotlin.String declared in <root>.A' type=kotlin.String origin=GET_PROPERTY
+          ${'$'}this: GET_VAR '<this>: <root>.A declared in <root>.A' type=<root>.A origin=null
+      arg1: CONST Int type=kotlin.Int value=2
+    then: THROW type=kotlin.Nothing
+      CONSTRUCTOR_CALL 'public constructor <init> (message: kotlin.String) [primary] declared in app.softwork.validation.ValidationException' type=app.softwork.validation.ValidationException origin=null
+        message: STRING_CONCATENATION type=kotlin.String
+          CONST String type=kotlin.String value="foo.length >= "
+          CONST Int type=kotlin.Int value=2
+          CONST String type=kotlin.String value=", was "
+          CALL 'public final fun <get-s> (): kotlin.String declared in <root>.A' type=kotlin.String origin=GET_PROPERTY
+            ${'$'}this: GET_VAR '<this>: <root>.A declared in <root>.A' type=<root>.A origin=null
+""",
+            blocks[0]
+        )
+    }
+
+    @Test
     fun wrongType() {
         val source = SourceFile.kotlin(
             "main.kt",
