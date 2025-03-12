@@ -1,6 +1,7 @@
 package app.softwork.validation.plugin.kotlin
 
 import com.tschuchort.compiletesting.*
+import com.tschuchort.compiletesting.KotlinCompilation.ExitCode
 import kotlin.test.*
 
 class CompilerTest {
@@ -39,7 +40,9 @@ class A(
 			""",
         )
 
-        val blocks = jvmCompile(source)
+        val blocks = jvmCompile(source) { result ->
+            assertEquals(ExitCode.OK, result.exitCode)
+        }
         assertEquals(4, blocks.size)
         assertEquals(
             """WHEN type=kotlin.Unit origin=IF
@@ -137,5 +140,28 @@ class A(
 """,
             blocks[3]
         )
+    }
+
+    @Test
+    fun wrongType() {
+        val source = SourceFile.kotlin(
+            "main.kt",
+            """import app.softwork.validation.MinLength
+import app.softwork.validation.MaxLength
+
+data class A(
+    @MinLength(2)
+    @MaxLength(4)
+    val s: Int,
+)
+			""",
+        )
+
+        val blocks = jvmCompile(source) { result ->
+            assertEquals(ExitCode.COMPILATION_ERROR, result.exitCode)
+            assertTrue("main.kt:7:12 MinLength requires type kotlin.String" in result.messages)
+            assertTrue("main.kt:7:12 MaxLength requires type kotlin.String" in result.messages)
+        }
+        assertEquals(0, blocks.size)
     }
 }

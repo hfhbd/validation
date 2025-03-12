@@ -1,4 +1,4 @@
-package app.softwork.validation.plugin.kotlin
+package app.softwork.validation.plugin.kotlin.ir
 
 import org.jetbrains.kotlin.backend.common.extensions.*
 import org.jetbrains.kotlin.ir.declarations.*
