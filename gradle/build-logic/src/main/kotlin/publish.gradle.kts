@@ -7,12 +7,12 @@ plugins {
 publishing {
     publications.withType<MavenPublication>().configureEach {
         pom {
-            name.set("app.softwork Busineslogic")
-            description.set("Businesslogc")
-            url.set("https://github.com/hfhbd/businesslogic")
+            name.set("app.softwork Validation")
+            description.set("Validation")
+            url.set("https://github.com/hfhbd/validation")
             licenses {
                 license {
-                    name.set("The Apache License, Version 2.0")
+                    name.set("Apache-2.0")
                     url.set("https://www.apache.org/licenses/LICENSE-2.0.txt")
                 }
             }
@@ -24,9 +24,9 @@ publishing {
                 }
             }
             scm {
-                connection.set("scm:git://github.com/hfhbd/businesslogic.git")
-                developerConnection.set("scm:git://github.com/hfhbd/businesslogic.git")
-                url.set("https://github.com/hfhbd/businesslogic")
+                connection.set("scm:git://github.com/hfhbd/validation.git")
+                developerConnection.set("scm:git://github.com/hfhbd/validation.git")
+                url.set("https://github.com/hfhbd/validation")
             }
         }
     }
