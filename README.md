@@ -1,6 +1,6 @@
 # Validation
 
-Compiler plugin to validate the length of String properties
+A compiler plugin to validate the length of String properties.
 
 ```kotlin
 import app.softwork.validation.MinLength
@@ -22,3 +22,24 @@ fun main() {
     A(a = "abc") // IllegalStateException: Expected!
 }
 ```
+
+- [Source code](https://github.com/hfhbd/validation)
+- [Docs](https://hfhbd.github.io/validation)
+
+## Install
+
+The gradle plugin is uploaded to MavenCentral. The runtime supports all targets.
+
+```kotlin
+plugins {
+    id("app.softwork.validation") version "LATEST"
+}
+
+repositories {
+    mavenCentral()
+}
+```
+
+## License
+
+Apache 2
