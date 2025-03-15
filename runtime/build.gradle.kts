@@ -19,9 +19,7 @@ tasks.jvmJar {
 }
 
 tasks.named<JavaCompile>("compileJava9Java") {
-    javaCompiler.set(javaToolchains.compilerFor {
-        languageVersion.set(JavaLanguageVersion.of(21))
-    })
+    javaCompiler.set(javaToolchains.compilerFor {})
     options.release.set(9)
 
     options.compilerArgumentProviders += object : CommandLineArgumentProvider {
