@@ -42,4 +42,4 @@ repositories {
 
 ## License
 
-Apache 2
+Apache License 2.0
