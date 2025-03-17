@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
-
 plugins {
     id("mpp")
 }
@@ -26,7 +24,7 @@ tasks.named<JavaCompile>("compileJava9Java") {
 
         @InputFiles
         @PathSensitive(PathSensitivity.RELATIVE)
-        val kotlinClasses = tasks.named<KotlinJvmCompile>("compileKotlinJvm").flatMap(KotlinJvmCompile::destinationDirectory)
+        val kotlinClasses = tasks.compileKotlinJvm.flatMap { it.destinationDirectory }
 
         override fun asArguments(): List<String> = listOf(
             "--patch-module",
