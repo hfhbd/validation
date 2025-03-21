@@ -2,10 +2,6 @@ plugins {
     id("mpp")
 }
 
-kotlin.jvm {
-    withJava()
-}
-
 val java9 by java.sourceSets.registering
 
 tasks.jvmJar {
