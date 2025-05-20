@@ -16,42 +16,36 @@ import org.jetbrains.kotlin.utils.addToStdlib.constant
 internal data object ValidationPropertyChecker : FirValueParameterChecker(
     mppKind = MppCheckerKind.Common,
 ) {
-    override fun check(
-        declaration: FirValueParameter,
-        context: CheckerContext,
-        reporter: DiagnosticReporter
-    ) {
+    context(context: CheckerContext, reporter: DiagnosticReporter)
+    override fun check(declaration: FirValueParameter) {
         if (context.session.validationPredicateMatchingService.isAnnotatedMaxLength(declaration.symbol)) {
-            checkMaxLengthAnnotation(declaration, context, reporter)
+            checkMaxLengthAnnotation(declaration)
         }
         if (context.session.validationPredicateMatchingService.isAnnotatedMinLength(declaration.symbol)) {
-            checkMinLengthAnnotation(declaration, context, reporter)
+            checkMinLengthAnnotation(declaration)
         }
     }
 
+    context(context: CheckerContext, reporter: DiagnosticReporter)
     private fun checkMaxLengthAnnotation(
         declaration: FirValueParameter,
-        context: CheckerContext,
-        reporter: DiagnosticReporter
     ) {
         if (!declaration.isString(context.session)) {
             reporter.reportOn(
                 declaration.returnTypeRef.source,
                 ValidationErrors.VALIDATION_MAXLENGTH_NOT_STRING,
-                context
             )
         }
     }
+
+    context(context: CheckerContext, reporter: DiagnosticReporter)
     private fun checkMinLengthAnnotation(
         declaration: FirValueParameter,
-        context: CheckerContext,
-        reporter: DiagnosticReporter
     ) {
         if (!declaration.isString(context.session)) {
             reporter.reportOn(
                 declaration.returnTypeRef.source,
                 ValidationErrors.VALIDATION_MINLENGTH_NOT_STRING,
-                context
             )
         }
     }

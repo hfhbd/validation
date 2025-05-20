@@ -1,17 +1,18 @@
 plugins {
     id("jvm")
+    id("io.github.hfhbd.kotlin-compiler-testing")
 }
 
 kotlin.compilerOptions {
     optIn.add("org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi")
+    freeCompilerArgs.add("-Xcontext-parameters")
 }
 
 dependencies {
-    compileOnly(libs.kotlin.compiler)
+    annotationsRuntime(projects.runtime)
+    annotationsRuntime(libs.serialization.core)
+}
 
-    testImplementation(kotlin("test"))
-    testImplementation(libs.kotlinCompilerTester)
-    testImplementation(libs.kotlin.compiler.embeddable)
-    testImplementation(projects.runtime)
-    testImplementation(libs.serialization.core)
+val generateTests by tasks.existing(JavaExec::class) {
+    mainClass.set("app.softwork.validation.plugin.kotlin.GenerateTestsKt")
 }

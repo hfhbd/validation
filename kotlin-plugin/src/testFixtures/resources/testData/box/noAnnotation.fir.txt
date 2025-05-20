@@ -1,0 +1,43 @@
+FILE: noAnnotation.kt
+    public final class A : R|kotlin/Any| {
+        public constructor(s: R|kotlin/String|, d: R|kotlin/String?|): R|A| {
+            super<R|kotlin/Any|>()
+        }
+
+        public final val s: R|kotlin/String| = R|<local>/s|
+            public get(): R|kotlin/String|
+
+        public final val d: R|kotlin/String?| = R|<local>/d|
+            public get(): R|kotlin/String?|
+
+        init {
+            when () {
+                CMP(<, this@R|/A|.R|/A.s|.R|kotlin/String.length|.R|kotlin/Int.compareTo|(Int(2))) ->  {
+                    throw R|app/softwork/validation/ValidationException.ValidationException|(String(s.length >= 2, was ).R|kotlin/String.plus|(this@R|/A|.R|/A.s|))
+                }
+            }
+
+            when () {
+                CMP(>, this@R|/A|.R|/A.s|.R|kotlin/String.length|.R|kotlin/Int.compareTo|(Int(4))) ->  {
+                    throw R|app/softwork/validation/ValidationException.ValidationException|(String(s.length <= 4, was ).R|kotlin/String.plus|(this@R|/A|.R|/A.s|))
+                }
+            }
+
+            when () {
+                !=(this@R|/A|.R|/A.d|, Null(null)) && CMP(<, this@R|/A|.R|/A.d|.R|kotlin/String.length|.R|kotlin/Int.compareTo|(Int(2))) ->  {
+                    throw R|app/softwork/validation/ValidationException.ValidationException|(String(d.length >= 2, was ).R|kotlin/String.plus|(this@R|/A|.R|/A.d|))
+                }
+            }
+
+            when () {
+                !=(this@R|/A|.R|/A.d|, Null(null)) && CMP(>, this@R|/A|.R|/A.d|.R|kotlin/String.length|.R|kotlin/Int.compareTo|(Int(4))) ->  {
+                    throw R|app/softwork/validation/ValidationException.ValidationException|(String(d.length <= 4, was ).R|kotlin/String.plus|(this@R|/A|.R|/A.d|))
+                }
+            }
+
+        }
+
+    }
+    public final fun box(): R|kotlin/String| {
+        ^box String(OK)
+    }
