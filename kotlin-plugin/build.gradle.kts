@@ -13,6 +13,6 @@ dependencies {
     annotationsRuntime(libs.serialization.core)
 }
 
-val generateTests by tasks.existing(JavaExec::class) {
+tasks.generateTests {
     mainClass.set("app.softwork.validation.plugin.kotlin.GenerateTestsKt")
 }

@@ -2,30 +2,11 @@ package app.softwork.validation.plugin.gradle
 
 import org.gradle.api.*
 import org.gradle.api.provider.*
-import org.gradle.api.tasks.SourceSet.*
-import org.jetbrains.kotlin.gradle.dsl.*
+import org.gradle.kotlin.dsl.listProperty
 import org.jetbrains.kotlin.gradle.plugin.*
-import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet.Companion.COMMON_MAIN_SOURCE_SET_NAME
 
 public class ValidationPlugin : KotlinCompilerPluginSupportPlugin {
-    override fun apply(target: Project) {
-        target.plugins.withId("org.jetbrains.kotlin.multiplatform") {
-            val kotlin = target.extensions.getByType(KotlinMultiplatformExtension::class.java)
-            kotlin.sourceSets.configureEach {
-                dependencies {
-                    implementation(runtimeDependency())
-                }
-            }
-        }
-        target.plugins.withId("org.jetbrains.kotlin.jvm") {
-            val kotlin = target.extensions.getByType(KotlinJvmProjectExtension::class.java)
-            kotlin.sourceSets.configureEach {
-                dependencies {
-                    implementation(runtimeDependency())
-                }
-            }
-        }
-    }
+    override fun apply(target: Project) {}
 
     private fun runtimeDependency() = "app.softwork.validation:runtime:$VERSION"
 
@@ -39,6 +20,11 @@ public class ValidationPlugin : KotlinCompilerPluginSupportPlugin {
         version = VERSION,
     )
 
-    override fun applyToCompilation(kotlinCompilation: KotlinCompilation<*>): Provider<List<SubpluginOption>> =
-        kotlinCompilation.project.providers.provider { emptyList() }
+    override fun applyToCompilation(kotlinCompilation: KotlinCompilation<*>): Provider<List<SubpluginOption>> {
+        kotlinCompilation.dependencies {
+            implementation(runtimeDependency())
+        }
+
+        return kotlinCompilation.project.objects.listProperty()
+    }
 }
