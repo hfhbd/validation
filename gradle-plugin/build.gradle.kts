@@ -21,7 +21,7 @@ fun Provider<PluginDependency>.toDep() = map {
     "${it.pluginId}:${it.pluginId}.gradle.plugin:${it.version}"
 }
 
-configurations.named("archives") {
+configurations.runtimeElements {
     attributes {
         attribute(
             GradlePluginApiVersion.GRADLE_PLUGIN_API_VERSION_ATTRIBUTE,
