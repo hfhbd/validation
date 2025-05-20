@@ -1,0 +1,16 @@
+FILE: success.kt
+    public final class A : R|kotlin/Any| {
+        public constructor(s: R|kotlin/String|, d: R|kotlin/String?|): R|A| {
+            super<R|kotlin/Any|>()
+        }
+
+        @R|app/softwork/validation/MinLength|(inclusive = Int(2)) @PROPERTY:R|app/softwork/validation/MaxLength|(inclusive = Int(4)) public final val s: R|kotlin/String| = R|<local>/s|
+            public get(): R|kotlin/String|
+
+        @R|app/softwork/validation/MinLength|(inclusive = Int(2)) @PROPERTY:R|app/softwork/validation/MaxLength|(inclusive = Int(4)) public final val d: R|kotlin/String?| = R|<local>/d|
+            public get(): R|kotlin/String?|
+
+    }
+    public final fun box(): R|kotlin/String| {
+        ^box String(OK)
+    }

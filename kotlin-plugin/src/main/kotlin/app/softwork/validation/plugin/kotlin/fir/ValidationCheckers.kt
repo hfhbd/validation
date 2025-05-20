@@ -8,7 +8,7 @@ import org.jetbrains.kotlin.fir.analysis.extensions.FirAdditionalCheckersExtensi
 internal class ValidationCheckers(session: FirSession) : FirAdditionalCheckersExtension(session) {
     override val declarationCheckers: DeclarationCheckers = object : DeclarationCheckers() {
         override val valueParameterCheckers: Set<FirValueParameterChecker> = setOf(
-            ValidationPropertyChecker
+            ValidationPropertyChecker,
         )
     }
 }

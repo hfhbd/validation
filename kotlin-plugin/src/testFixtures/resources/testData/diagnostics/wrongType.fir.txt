@@ -1,0 +1,14 @@
+FILE: wrongType.kt
+    public final data class A : R|kotlin/Any| {
+        public constructor(s: R|kotlin/Int|): R|A| {
+            super<R|kotlin/Any|>()
+        }
+
+        @R|app/softwork/validation/MinLength|(inclusive = Int(2)) @R|app/softwork/validation/MaxLength|(inclusive = Int(4)) public final val s: R|kotlin/Int| = R|<local>/s|
+            public get(): R|kotlin/Int|
+
+        public final operator fun component1(): R|kotlin/Int|
+
+        public final fun copy(s: R|kotlin/Int| = this@R|/A|.R|/A.s|): R|A|
+
+    }

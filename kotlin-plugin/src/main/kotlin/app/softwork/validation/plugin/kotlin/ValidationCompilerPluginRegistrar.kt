@@ -13,7 +13,13 @@ public class ValidationCompilerPluginRegistrar : CompilerPluginRegistrar() {
     override val supportsK2: Boolean = true
 
     override fun ExtensionStorage.registerExtensions(configuration: CompilerConfiguration) {
-        FirExtensionRegistrarAdapter.registerExtension(ValidationFirExtensionRegistrar)
-        IrGenerationExtension.registerExtension(ValidationInitExtensionRegistrar(null))
+        validation()
+    }
+
+    internal companion object {
+        internal fun ExtensionStorage.validation() {
+            FirExtensionRegistrarAdapter.registerExtension(ValidationFirExtensionRegistrar)
+            IrGenerationExtension.registerExtension(ValidationInitExtensionRegistrar)
+        }
     }
 }

@@ -15,21 +15,18 @@ java {
 
 dependencies {
     implementation(libs.plugins.kotlin.jvm.toDep())
-    testImplementation(kotlin("test"))
 }
 
 fun Provider<PluginDependency>.toDep() = map {
     "${it.pluginId}:${it.pluginId}.gradle.plugin:${it.version}"
 }
 
-configurations.configureEach {
-    if (isCanBeConsumed) {
-        attributes {
-            attribute(
-                GradlePluginApiVersion.GRADLE_PLUGIN_API_VERSION_ATTRIBUTE,
-                objects.named<GradlePluginApiVersion>(GradleVersion.version("8.6").version)
-            )
-        }
+configurations.runtimeElements {
+    attributes {
+        attribute(
+            GradlePluginApiVersion.GRADLE_PLUGIN_API_VERSION_ATTRIBUTE,
+            objects.named<GradlePluginApiVersion>(GradleVersion.version("9.0.0").version)
+        )
     }
 }
 
@@ -53,10 +50,17 @@ tasks.pluginUnderTestMetadata {
     pluginClasspath.from(configurations.runtimeClasspath)
 }
 
-tasks.test {
-    environment("fixtureDir", project.file("src/testFixtures").path)
+testing.suites.named("test", JvmTestSuite::class) {
+    useKotlinTest()
 
-    javaLauncher.set(javaToolchains.launcherFor {
-        languageVersion.set(JavaLanguageVersion.of(21))
-    })
+    targets.configureEach {
+        testTask {
+
+            environment("fixtureDir", project.file("src/testFixtures").path)
+
+            javaLauncher.set(javaToolchains.launcherFor {
+                languageVersion.set(JavaLanguageVersion.of(21))
+            })
+        }
+    }
 }
