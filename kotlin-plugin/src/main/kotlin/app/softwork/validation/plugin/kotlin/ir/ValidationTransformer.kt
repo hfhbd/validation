@@ -1,5 +1,6 @@
 package app.softwork.validation.plugin.kotlin.ir
 
+import org.jetbrains.kotlin.GeneratedDeclarationKey
 import org.jetbrains.kotlin.backend.common.extensions.IrPluginContext
 import org.jetbrains.kotlin.backend.common.lower.irNot
 import org.jetbrains.kotlin.backend.common.lower.irThrow
@@ -23,28 +24,24 @@ import org.jetbrains.kotlin.ir.declarations.IrClass
 import org.jetbrains.kotlin.ir.declarations.IrDeclarationOrigin
 import org.jetbrains.kotlin.ir.declarations.IrProperty
 import org.jetbrains.kotlin.ir.declarations.addMember
+import org.jetbrains.kotlin.ir.expressions.IrConst
 import org.jetbrains.kotlin.ir.expressions.IrConstructorCall
-import org.jetbrains.kotlin.ir.expressions.IrStatementOrigin
 import org.jetbrains.kotlin.ir.symbols.IrClassSymbol
 import org.jetbrains.kotlin.ir.symbols.IrSimpleFunctionSymbol
 import org.jetbrains.kotlin.ir.symbols.impl.IrAnonymousInitializerSymbolImpl
-import org.jetbrains.kotlin.ir.types.isNullable
+import org.jetbrains.kotlin.ir.util.isNullable
 import org.jetbrains.kotlin.ir.types.isString
 import org.jetbrains.kotlin.ir.util.constructors
-import org.jetbrains.kotlin.ir.util.dump
 import org.jetbrains.kotlin.ir.util.getAnnotation
 import org.jetbrains.kotlin.ir.util.getAnnotationStringValue
 import org.jetbrains.kotlin.ir.util.getPropertyGetter
 import org.jetbrains.kotlin.ir.util.parentClassOrNull
+import org.jetbrains.kotlin.ir.util.toIrConst
 import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
 import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.FqName
 
-internal class ValidationTransformer(
-    private val pluginContext: IrPluginContext,
-    private val dump: ((String) -> Unit)?,
-) : IrElementTransformerVoid() {
-
+internal class ValidationTransformer(private val pluginContext: IrPluginContext) : IrElementTransformerVoid() {
     private val MinLength = AnnotationFqn("app.softwork.validation.MinLength")
     private val MaxLength = AnnotationFqn("app.softwork.validation.MaxLength")
     private val SerialName = AnnotationFqn("kotlinx.serialization.SerialName")
@@ -63,11 +60,10 @@ internal class ValidationTransformer(
     private var newInitBlock: IrAnonymousInitializer? = null
 
     override fun visitClass(declaration: IrClass): IrStatement {
-
         val newInitBlock: IrAnonymousInitializer = declaration.factory.createAnonymousInitializer(
             startOffset = UNDEFINED_OFFSET,
             endOffset = UNDEFINED_OFFSET,
-            origin = IrDeclarationOrigin.DEFINED,
+            origin = IrDeclarationOrigin.GeneratedByPlugin(ValidationKey),
             symbol = IrAnonymousInitializerSymbolImpl(declaration.symbol),
         )
         newInitBlock.parent = declaration
@@ -79,12 +75,6 @@ internal class ValidationTransformer(
 
         return declaration.transformPostfix {
             if (newInitBlock.body.statements.isNotEmpty()) {
-                val dump = dump
-                if (dump != null) {
-                    for (stmt in newInitBlock.body.statements) {
-                        dump(stmt.dump())
-                    }
-                }
                 // move generated checks before user init code
                 val previousInitBlocks = declarations.indexOfFirst {
                     it is IrAnonymousInitializer
@@ -105,14 +95,12 @@ internal class ValidationTransformer(
             declarationName = declaration.getSerialName() ?: declaration.name.asString(),
             comp = less,
             compHuman = ">=",
-            originParam = IrStatementOrigin.LT
         )
         declaration.getAnnotation(MaxLength)?.addInit(
             declaration = declaration,
             declarationName = declaration.getSerialName() ?: declaration.name.asString(),
             comp = greater,
             compHuman = "<=",
-            originParam = IrStatementOrigin.GT,
         )
 
         return declaration
@@ -127,9 +115,8 @@ internal class ValidationTransformer(
         declarationName: String,
         comp: IrSimpleFunctionSymbol,
         compHuman: String,
-        originParam: IrStatementOrigin,
     ) {
-        val value = getValueArgument(0)!!
+        val value = (arguments[0]!! as IrConst).value as Int
         val klass = declaration.parentClassOrNull ?: return
 
         with(
@@ -140,20 +127,16 @@ internal class ValidationTransformer(
                 endOffset = endOffset,
             )
         ) {
-            val prop = irCall(
-                declaration.getter!!
-            ).apply {
-                dispatchReceiver = irGet(klass.thisReceiver!!)
-                origin = IrStatementOrigin.GET_PROPERTY
-            }
             val isNullable = declaration.getter!!.returnType.isNullable()
             val checkLength = irCall(comp).apply {
-                putValueArgument(0, irCall(STRINGlength).apply {
-                    dispatchReceiver = prop
-                    origin = IrStatementOrigin.GET_PROPERTY
-                })
-                putValueArgument(1, value)
-                origin = originParam
+                arguments[0] = irCall(STRINGlength).apply {
+                    dispatchReceiver = irCall(
+                        declaration.getter!!
+                    ).apply {
+                        dispatchReceiver = irGet(klass.thisReceiver!!)
+                    }
+                }
+                arguments[1] = value.toIrConst(pluginContext.irBuiltIns.intType)
             }
             val newInitBlock = newInitBlock ?: return@with
             newInitBlock.body.statements += irIfThen(
@@ -163,34 +146,41 @@ internal class ValidationTransformer(
                         type = booleanType,
                         condition = irNot(
                             irEqualsNull(
-                                prop
+                                irCall(
+                                    declaration.getter!!
+                                ).apply {
+                                    dispatchReceiver = irGet(klass.thisReceiver!!)
+                                }
                             ),
                         ),
                         thenPart = checkLength
                     ).apply {
-                        origin = IrStatementOrigin.ANDAND
                         branches.add(irBranch(irTrue(), irFalse()))
                     }
                 } else checkLength,
                 thenPart = irThrow(irCallConstructor(
                     validationExceptionSymbol!!.constructors.first {
-                        if (it.owner.valueParameters.size == 1) {
-                            val singleParameter = it.owner.valueParameters.single()
+                        if (it.owner.parameters.size == 1) {
+                            val singleParameter = it.owner.parameters.single()
                             singleParameter.type.isString()
                         } else false
                     },
                     emptyList(),
                 ).apply {
-                    putValueArgument(0, irConcat().apply {
+                    arguments[0] = irConcat().apply {
                         arguments += irString("$declarationName.length $compHuman ")
-                        arguments += value
+                        arguments += value.toIrConst(pluginContext.irBuiltIns.intType)
                         arguments += irString(", was ")
-                        arguments += prop
-                    })
+                        arguments += irCall(
+                            declaration.getter!!
+                        ).apply {
+                            dispatchReceiver = irGet(klass.thisReceiver!!)
+                        }
+                    }
                 },
-            )).apply {
-                origin = IrStatementOrigin.IF
-            }
+            ))
         }
     }
 }
+
+private data object ValidationKey : GeneratedDeclarationKey()

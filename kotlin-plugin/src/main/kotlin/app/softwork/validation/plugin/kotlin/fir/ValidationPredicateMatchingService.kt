@@ -11,7 +11,6 @@ import org.jetbrains.kotlin.name.FqName
 
 internal class ValidationPredicateMatchingService(session: FirSession) : FirExtensionSessionComponent(session) {
     companion object {
-
         val minLengthFq = FqName("app.softwork.validation.MinLength")
         val minLengthClassId = ClassId.Companion.topLevel(minLengthFq)
 
