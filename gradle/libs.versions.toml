@@ -11,6 +11,6 @@ serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-cor
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
-serviceloader = { id = "app.softwork.serviceloader-compiler", version = "0.0.15" }
+serviceloader = { id = "app.softwork.serviceloader-compiler", version = "0.0.16" }
 mavencentral = { id = "io.github.hfhbd.mavencentral", version = "0.0.17" }
 dokka = { id = "org.jetbrains.dokka", version = "2.0.0" }
