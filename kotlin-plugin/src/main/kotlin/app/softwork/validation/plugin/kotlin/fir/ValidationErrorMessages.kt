@@ -4,12 +4,12 @@ import org.jetbrains.kotlin.diagnostics.KtDiagnosticFactoryToRendererMap
 import org.jetbrains.kotlin.diagnostics.rendering.BaseDiagnosticRendererFactory
 
 internal data object ValidationErrorMessages : BaseDiagnosticRendererFactory() {
-    override val MAP: KtDiagnosticFactoryToRendererMap = KtDiagnosticFactoryToRendererMap("Validation").apply {
-        put(
+    override val MAP by KtDiagnosticFactoryToRendererMap("Validation") { map ->
+        map.put(
             ValidationErrors.VALIDATION_MAXLENGTH_NOT_STRING,
             "MaxLength requires type kotlin.String",
         )
-        put(
+        map.put(
             ValidationErrors.VALIDATION_MINLENGTH_NOT_STRING,
             "MinLength requires type kotlin.String",
         )

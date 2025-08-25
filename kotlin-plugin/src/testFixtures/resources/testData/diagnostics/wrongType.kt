@@ -8,3 +8,5 @@ data class A(
     @MaxLength(4)
     val s: <!VALIDATION_MAXLENGTH_NOT_STRING, VALIDATION_MINLENGTH_NOT_STRING!>Int<!>,
 )
+
+/* GENERATED_FIR_TAGS: classDeclaration, data, integerLiteral, primaryConstructor, propertyDeclaration */
