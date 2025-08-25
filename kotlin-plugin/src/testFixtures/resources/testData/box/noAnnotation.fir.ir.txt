@@ -64,8 +64,9 @@ FILE fqName:<root> fileName:/noAnnotation.kt
                     ARG arg1: CONST Null type=kotlin.Nothing? value=null
                 then: CALL 'public final fun less (arg0: kotlin.Int, arg1: kotlin.Int): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=LT
                   ARG arg0: CALL 'public open fun <get-length> (): kotlin.Int declared in kotlin.String' type=kotlin.Int origin=GET_PROPERTY
-                    ARG <this>: CALL 'public final fun <get-d> (): kotlin.String? declared in <root>.A' type=kotlin.String? origin=GET_PROPERTY
-                      ARG <this>: GET_VAR '<this>: <root>.A declared in <root>.A' type=<root>.A origin=IMPLICIT_ARGUMENT
+                    ARG <this>: TYPE_OP type=kotlin.String origin=IMPLICIT_CAST typeOperand=kotlin.String
+                      CALL 'public final fun <get-d> (): kotlin.String? declared in <root>.A' type=kotlin.String? origin=GET_PROPERTY
+                        ARG <this>: GET_VAR '<this>: <root>.A declared in <root>.A' type=<root>.A origin=IMPLICIT_ARGUMENT
                   ARG arg1: CONST Int type=kotlin.Int value=2
               BRANCH
                 if: CONST Boolean type=kotlin.Boolean value=true
@@ -75,8 +76,9 @@ FILE fqName:<root> fileName:/noAnnotation.kt
                 CONSTRUCTOR_CALL 'public constructor <init> (message: kotlin.String) declared in app.softwork.validation.ValidationException' type=app.softwork.validation.ValidationException origin=null
                   ARG message: CALL 'public final fun plus (other: kotlin.Any?): kotlin.String declared in kotlin.String' type=kotlin.String origin=PLUS
                     ARG <this>: CONST String type=kotlin.String value="d.length >= 2, was "
-                    ARG other: CALL 'public final fun <get-d> (): kotlin.String? declared in <root>.A' type=kotlin.String? origin=GET_PROPERTY
-                      ARG <this>: GET_VAR '<this>: <root>.A declared in <root>.A' type=<root>.A origin=IMPLICIT_ARGUMENT
+                    ARG other: TYPE_OP type=kotlin.String origin=IMPLICIT_CAST typeOperand=kotlin.String
+                      CALL 'public final fun <get-d> (): kotlin.String? declared in <root>.A' type=kotlin.String? origin=GET_PROPERTY
+                        ARG <this>: GET_VAR '<this>: <root>.A declared in <root>.A' type=<root>.A origin=IMPLICIT_ARGUMENT
         WHEN type=kotlin.Unit origin=IF
           BRANCH
             if: WHEN type=kotlin.Boolean origin=ANDAND
@@ -88,8 +90,9 @@ FILE fqName:<root> fileName:/noAnnotation.kt
                     ARG arg1: CONST Null type=kotlin.Nothing? value=null
                 then: CALL 'public final fun greater (arg0: kotlin.Int, arg1: kotlin.Int): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=GT
                   ARG arg0: CALL 'public open fun <get-length> (): kotlin.Int declared in kotlin.String' type=kotlin.Int origin=GET_PROPERTY
-                    ARG <this>: CALL 'public final fun <get-d> (): kotlin.String? declared in <root>.A' type=kotlin.String? origin=GET_PROPERTY
-                      ARG <this>: GET_VAR '<this>: <root>.A declared in <root>.A' type=<root>.A origin=IMPLICIT_ARGUMENT
+                    ARG <this>: TYPE_OP type=kotlin.String origin=IMPLICIT_CAST typeOperand=kotlin.String
+                      CALL 'public final fun <get-d> (): kotlin.String? declared in <root>.A' type=kotlin.String? origin=GET_PROPERTY
+                        ARG <this>: GET_VAR '<this>: <root>.A declared in <root>.A' type=<root>.A origin=IMPLICIT_ARGUMENT
                   ARG arg1: CONST Int type=kotlin.Int value=4
               BRANCH
                 if: CONST Boolean type=kotlin.Boolean value=true
@@ -99,8 +102,9 @@ FILE fqName:<root> fileName:/noAnnotation.kt
                 CONSTRUCTOR_CALL 'public constructor <init> (message: kotlin.String) declared in app.softwork.validation.ValidationException' type=app.softwork.validation.ValidationException origin=null
                   ARG message: CALL 'public final fun plus (other: kotlin.Any?): kotlin.String declared in kotlin.String' type=kotlin.String origin=PLUS
                     ARG <this>: CONST String type=kotlin.String value="d.length <= 4, was "
-                    ARG other: CALL 'public final fun <get-d> (): kotlin.String? declared in <root>.A' type=kotlin.String? origin=GET_PROPERTY
-                      ARG <this>: GET_VAR '<this>: <root>.A declared in <root>.A' type=<root>.A origin=IMPLICIT_ARGUMENT
+                    ARG other: TYPE_OP type=kotlin.String origin=IMPLICIT_CAST typeOperand=kotlin.String
+                      CALL 'public final fun <get-d> (): kotlin.String? declared in <root>.A' type=kotlin.String? origin=GET_PROPERTY
+                        ARG <this>: GET_VAR '<this>: <root>.A declared in <root>.A' type=<root>.A origin=IMPLICIT_ARGUMENT
     CONSTRUCTOR visibility:public returnType:<root>.A [primary]
       VALUE_PARAMETER kind:Regular name:s index:0 type:kotlin.String
       VALUE_PARAMETER kind:Regular name:d index:1 type:kotlin.String?
