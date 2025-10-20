@@ -8,5 +8,5 @@ serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-cor
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 serviceloader = { id = "app.softwork.serviceloader-compiler", version = "0.0.21" }
 mavencentral = { id = "io.github.hfhbd.mavencentral", version = "0.0.23" }
-dokka = { id = "org.jetbrains.dokka", version = "2.0.0" }
+dokka = { id = "org.jetbrains.dokka", version = "2.1.0" }
 kotlin-compiler-testing = { id = "io.github.hfhbd.kotlin-compiler-testing", version = "0.0.3" }
