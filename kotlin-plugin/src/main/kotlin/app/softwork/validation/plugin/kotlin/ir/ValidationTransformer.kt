@@ -51,9 +51,9 @@ internal class ValidationTransformer(private val pluginContext: IrPluginContext)
     private val unit = pluginContext.irBuiltIns.unitClass
     private val unitType = pluginContext.irBuiltIns.unitType
     private val booleanType = pluginContext.irBuiltIns.booleanType
-    private val less =pluginContext.irBuiltIns.lessFunByOperandType[pluginContext.irBuiltIns.intClass]!!
+    private val less = pluginContext.irBuiltIns.lessFunByOperandType[pluginContext.irBuiltIns.intClass]!!
     private val greater = pluginContext.irBuiltIns.greaterFunByOperandType[pluginContext.irBuiltIns.intClass]!!
-    private val STRINGlength = pluginContext.irBuiltIns.stringClass.getPropertyGetter("length")!!
+    private val stringLength = pluginContext.irBuiltIns.stringClass.getPropertyGetter("length")!!
 
     private var newInitBlock: IrAnonymousInitializer? = null
 
@@ -127,7 +127,7 @@ internal class ValidationTransformer(private val pluginContext: IrPluginContext)
         ) {
             val isNullable = declaration.getter!!.returnType.isNullable()
             val checkLength = irCall(comp).apply {
-                arguments[0] = irCall(STRINGlength).apply {
+                arguments[0] = irCall(stringLength).apply {
                     dispatchReceiver = irCall(
                         declaration.getter!!
                     ).apply {
@@ -156,27 +156,29 @@ internal class ValidationTransformer(private val pluginContext: IrPluginContext)
                         branches.add(irBranch(irTrue(), irFalse()))
                     }
                 } else checkLength,
-                thenPart = irThrow(irCallConstructor(
-                    validationExceptionSymbol!!.constructors.first {
-                        if (it.owner.parameters.size == 1) {
-                            val singleParameter = it.owner.parameters.single()
-                            singleParameter.type.isString()
-                        } else false
-                    },
-                    emptyList(),
-                ).apply {
-                    arguments[0] = irConcat().apply {
-                        arguments += irString("$declarationName.length $compHuman ")
-                        arguments += value.toIrConst(pluginContext.irBuiltIns.intType)
-                        arguments += irString(", was ")
-                        arguments += irCall(
-                            declaration.getter!!
-                        ).apply {
-                            dispatchReceiver = irGet(klass.thisReceiver!!)
+                thenPart = irThrow(
+                    irCallConstructor(
+                        validationExceptionSymbol!!.constructors.first {
+                            if (it.owner.parameters.size == 1) {
+                                val singleParameter = it.owner.parameters.single()
+                                singleParameter.type.isString()
+                            } else false
+                        },
+                        emptyList(),
+                    ).apply {
+                        arguments[0] = irConcat().apply {
+                            arguments += irString("$declarationName.length $compHuman ")
+                            arguments += value.toIrConst(pluginContext.irBuiltIns.intType)
+                            arguments += irString(", was ")
+                            arguments += irCall(
+                                declaration.getter!!
+                            ).apply {
+                                dispatchReceiver = irGet(klass.thisReceiver!!)
+                            }
                         }
-                    }
-                },
-            ))
+                    },
+                )
+            )
         }
     }
 }
