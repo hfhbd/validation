@@ -11,12 +11,15 @@ import org.jetbrains.kotlin.fir.extensions.FirExtensionRegistrarAdapter
 @ServiceLoader(CompilerPluginRegistrar::class)
 public class ValidationCompilerPluginRegistrar : CompilerPluginRegistrar() {
     override val supportsK2: Boolean = true
+    override val pluginId: String = PLUGIN_ID
 
     override fun ExtensionStorage.registerExtensions(configuration: CompilerConfiguration) {
         validation()
     }
 
     internal companion object {
+        const val PLUGIN_ID = "app.softwork.validation"
+
         internal fun ExtensionStorage.validation() {
             FirExtensionRegistrarAdapter.registerExtension(ValidationFirExtensionRegistrar)
             IrGenerationExtension.registerExtension(ValidationInitExtensionRegistrar)

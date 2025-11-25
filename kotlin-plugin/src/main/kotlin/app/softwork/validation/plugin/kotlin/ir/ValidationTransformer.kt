@@ -48,13 +48,11 @@ internal class ValidationTransformer(private val pluginContext: IrPluginContext)
 
     private val validationExceptionSymbol: IrClassSymbol? =
         pluginContext.referenceClass(ClassId(FqName("app.softwork.validation"), FqName("ValidationException"), false))
-    private val unit = pluginContext.symbols.irBuiltIns.unitClass
-    private val unitType = pluginContext.symbols.irBuiltIns.unitType
-    private val booleanType = pluginContext.symbols.irBuiltIns.booleanType
-    private val less =
-        pluginContext.symbols.irBuiltIns.lessFunByOperandType[pluginContext.symbols.irBuiltIns.intClass]!!
-    private val greater =
-        pluginContext.symbols.irBuiltIns.greaterFunByOperandType[pluginContext.symbols.irBuiltIns.intClass]!!
+    private val unit = pluginContext.irBuiltIns.unitClass
+    private val unitType = pluginContext.irBuiltIns.unitType
+    private val booleanType = pluginContext.irBuiltIns.booleanType
+    private val less =pluginContext.irBuiltIns.lessFunByOperandType[pluginContext.irBuiltIns.intClass]!!
+    private val greater = pluginContext.irBuiltIns.greaterFunByOperandType[pluginContext.irBuiltIns.intClass]!!
     private val STRINGlength = pluginContext.irBuiltIns.stringClass.getPropertyGetter("length")!!
 
     private var newInitBlock: IrAnonymousInitializer? = null
