@@ -1,12 +1,12 @@
 [versions]
-kotlin = "2.2.21"
+kotlin = "2.3.0-RC"
 
 [libraries]
 serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version = "1.9.0" }
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
-serviceloader = { id = "app.softwork.serviceloader-compiler", version = "0.0.21" }
+serviceloader = { id = "app.softwork.serviceloader-compiler", version = "0.0.22" }
 mavencentral = { id = "io.github.hfhbd.mavencentral", version = "0.0.23" }
 dokka = { id = "org.jetbrains.dokka", version = "2.1.0" }
 kotlin-compiler-testing = { id = "io.github.hfhbd.kotlin-compiler-testing", version = "0.0.3" }
