@@ -23,6 +23,7 @@ jobs:
         with:
           languages: kotlin
           build-mode: manual
+          tools: linked
 
       - name: Build with Gradle
         run: ./gradlew --no-build-cache jvmMainClasses classes
