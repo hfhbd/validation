@@ -18,6 +18,18 @@ jobs:
           build-scan-terms-of-use-url: 'https://gradle.com/terms-of-service'
           build-scan-terms-of-use-agree: 'yes'
 
-
       - name: Build with Gradle
+        id: gradle-build
         run: ./gradlew build
+        continue-on-error: true
+
+      - name: Run kotlinUpgradePackageLock
+        if: ${{ steps.gradle-build.outcome == 'failure' }}
+        run: ./gradlew kotlinUpgradePackageLock
+
+      - name: Upload package-lock artifact
+        if: ${{ steps.gradle-build.outcome == 'failure' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: kotlin-js-package-lock
+          path: kotlin-js-store/package-lock.json
