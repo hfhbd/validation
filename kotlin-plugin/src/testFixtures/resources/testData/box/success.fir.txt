@@ -4,10 +4,10 @@ FILE: success.kt
             super<R|kotlin/Any|>()
         }
 
-        @R|app/softwork/validation/MinLength|(inclusive = Int(2)) @PROPERTY:R|app/softwork/validation/MaxLength|(inclusive = Int(4)) public final val s: R|kotlin/String| = R|<local>/s|
+        @R|app/softwork/validation/MinLength|(inclusive = Int(2) [evaluated = Int(2)]) @PROPERTY:R|app/softwork/validation/MaxLength|(inclusive = Int(4) [evaluated = Int(4)]) public final val s: R|kotlin/String| = R|<local>/s|
             public get(): R|kotlin/String|
 
-        @R|app/softwork/validation/MinLength|(inclusive = Int(2)) @PROPERTY:R|app/softwork/validation/MaxLength|(inclusive = Int(4)) public final val d: R|kotlin/String?| = R|<local>/d|
+        @R|app/softwork/validation/MinLength|(inclusive = Int(2) [evaluated = Int(2)]) @PROPERTY:R|app/softwork/validation/MaxLength|(inclusive = Int(4) [evaluated = Int(4)]) public final val d: R|kotlin/String?| = R|<local>/d|
             public get(): R|kotlin/String?|
 
     }

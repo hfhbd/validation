@@ -23,7 +23,6 @@ kotlin {
 
     // tier 1
     linuxX64()
-    macosX64()
     macosArm64()
     iosSimulatorArm64()
     iosX64()
@@ -31,11 +30,9 @@ kotlin {
     // tier 2
     linuxArm64()
     watchosSimulatorArm64()
-    watchosX64()
     watchosArm32()
     watchosArm64()
     tvosSimulatorArm64()
-    tvosX64()
     tvosArm64()
     iosArm64()
 

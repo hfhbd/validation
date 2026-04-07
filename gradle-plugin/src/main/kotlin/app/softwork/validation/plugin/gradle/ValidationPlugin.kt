@@ -1,12 +1,9 @@
 package app.softwork.validation.plugin.gradle
 
-import org.gradle.api.*
 import org.gradle.api.provider.*
 import org.jetbrains.kotlin.gradle.plugin.*
 
 public class ValidationPlugin : KotlinCompilerPluginSupportPlugin {
-    override fun apply(target: Project) {}
-
     private fun runtimeDependency() = "app.softwork.validation:runtime:$VERSION"
 
     override fun isApplicable(kotlinCompilation: KotlinCompilation<*>): Boolean = true
