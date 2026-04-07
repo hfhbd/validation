@@ -47,7 +47,7 @@ internal class ValidationTransformer(private val pluginContext: IrPluginContext)
     private val SerialName = AnnotationFqn("kotlinx.serialization.SerialName")
 
     private val validationExceptionSymbol: IrClassSymbol? =
-        pluginContext.referenceClass(ClassId(FqName("app.softwork.validation"), FqName("ValidationException"), false))
+        pluginContext.finderForBuiltins().findClass(ClassId(FqName("app.softwork.validation"), FqName("ValidationException"), false))
     private val unit = pluginContext.irBuiltIns.unitClass
     private val unitType = pluginContext.irBuiltIns.unitType
     private val booleanType = pluginContext.irBuiltIns.booleanType

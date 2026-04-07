@@ -1,5 +1,6 @@
 plugins {
-    `kotlin-dsl`
+    id("java-gradle-plugin")
+    kotlin("jvm")
     id("setup")
     id("java-test-fixtures")
 }
@@ -46,7 +47,6 @@ testing.suites.named("test", JvmTestSuite::class) {
 
     targets.configureEach {
         testTask {
-
             environment("fixtureDir", project.file("src/testFixtures").path)
 
             javaLauncher.set(javaToolchains.launcherFor {
