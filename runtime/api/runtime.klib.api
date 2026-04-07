@@ -1,0 +1,28 @@
+// Klib ABI Dump
+// Targets: [androidNativeArm32, androidNativeArm64, androidNativeX64, androidNativeX86, iosArm64, iosSimulatorArm64, iosX64, js, linuxArm64, linuxX64, macosArm64, mingwX64, tvosArm64, tvosSimulatorArm64, wasmJs, wasmWasi, watchosArm32, watchosArm64, watchosDeviceArm64, watchosSimulatorArm64]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <app.softwork.validation:runtime>
+open annotation class app.softwork.validation/MaxLength : kotlin/Annotation { // app.softwork.validation/MaxLength|null[0]
+    constructor <init>(kotlin/Int) // app.softwork.validation/MaxLength.<init>|<init>(kotlin.Int){}[0]
+
+    final val inclusive // app.softwork.validation/MaxLength.inclusive|{}inclusive[0]
+        final fun <get-inclusive>(): kotlin/Int // app.softwork.validation/MaxLength.inclusive.<get-inclusive>|<get-inclusive>(){}[0]
+}
+
+open annotation class app.softwork.validation/MinLength : kotlin/Annotation { // app.softwork.validation/MinLength|null[0]
+    constructor <init>(kotlin/Int) // app.softwork.validation/MinLength.<init>|<init>(kotlin.Int){}[0]
+
+    final val inclusive // app.softwork.validation/MinLength.inclusive|{}inclusive[0]
+        final fun <get-inclusive>(): kotlin/Int // app.softwork.validation/MinLength.inclusive.<get-inclusive>|<get-inclusive>(){}[0]
+}
+
+final class app.softwork.validation/ValidationException : kotlin/IllegalArgumentException { // app.softwork.validation/ValidationException|null[0]
+    constructor <init>(kotlin/String) // app.softwork.validation/ValidationException.<init>|<init>(kotlin.String){}[0]
+
+    final val message // app.softwork.validation/ValidationException.message|{}message[0]
+        final fun <get-message>(): kotlin/String // app.softwork.validation/ValidationException.message.<get-message>|<get-message>(){}[0]
+}
