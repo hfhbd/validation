@@ -4,7 +4,7 @@ FILE: serialName.kt
             super<R|kotlin/Any|>()
         }
 
-        @R|app/softwork/validation/MinLength|(inclusive = Int(2)) public final val s: R|kotlin/String| = R|<local>/s|
+        @R|app/softwork/validation/MinLength|(inclusive = Int(2) [evaluated = Int(2)]) public final val s: R|kotlin/String| = R|<local>/s|
             public get(): R|kotlin/String|
 
     }

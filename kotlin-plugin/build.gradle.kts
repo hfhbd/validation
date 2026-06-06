@@ -5,14 +5,13 @@ plugins {
 
 kotlin.compilerOptions {
     optIn.add("org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi")
-    freeCompilerArgs.add("-Xcontext-parameters")
 }
 
-dependencies {
-    annotationsRuntime(projects.runtime)
-    annotationsRuntime(libs.serialization.core)
-}
+kotlinTesting {
+    mainClass = "app.softwork.validation.plugin.kotlin.GenerateTestsKt"
 
-tasks.generateTests {
-    mainClass.set("app.softwork.validation.plugin.kotlin.GenerateTestsKt")
+    dependencies {
+        annotation(projects.runtime)
+        annotation(libs.serialization.core)
+    }
 }
