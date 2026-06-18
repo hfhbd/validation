@@ -26,6 +26,20 @@ class IntegrationTest {
     }
 
     @Test
+    fun serializationFails() {
+        val projectDir = fixtureDir / "resources" / "serialization"
+        val buildResult = build(projectDir, ":foo:run", """--args=a""")
+        val result = buildResult.task(":foo:run")
+
+        assertEquals(
+            TaskOutcome.FAILED,
+            result?.outcome,
+        )
+        assertTrue("""app.softwork.validation.ValidationException: a.length >= 2, was a""" in buildResult.output)
+        assertTrue("""at A.<init>(main.kt:11)""" in buildResult.output)
+    }
+
+    @Test
     fun aTooShort() {
         val projectDir = fixtureDir / "resources" / "testing"
         val buildResult = build(projectDir, ":foo:run", """--args=1 abcd""")

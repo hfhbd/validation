@@ -8,7 +8,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "testing"
+rootProject.name = "serialization"
 
 includeBuild("../../../../../")
 
