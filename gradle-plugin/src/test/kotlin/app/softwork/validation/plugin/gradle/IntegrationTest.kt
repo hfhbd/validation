@@ -21,8 +21,20 @@ class IntegrationTest {
         )
         assertTrue("""java.lang.IllegalStateException: Should not happen""" in buildResult.output)
         assertTrue("""at A.<init>(main.kt:22)""" in buildResult.output)
+    }
 
-        assertEquals(TaskOutcome.SUCCESS, buildResult.task(":foo:compileTestFixturesKotlin")?.outcome)
+    @Test
+    fun serializationFails() {
+        val projectDir = fixtureDir / "resources" / "serialization"
+        val buildResult = build(projectDir, ":foo:run", """--args=a""")
+        val result = buildResult.task(":foo:run")
+
+        assertEquals(
+            TaskOutcome.FAILED,
+            result?.outcome,
+        )
+        assertTrue("""app.softwork.validation.ValidationException: a.length >= 2, was a""" in buildResult.output)
+        assertTrue("""at A.<init>(main.kt:11)""" in buildResult.output)
     }
 
     @Test

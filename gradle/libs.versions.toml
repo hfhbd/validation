@@ -1,11 +1,14 @@
 [versions]
 kotlin = "2.4.0"
+serialization = "1.11.0"
 
 [libraries]
-serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version = "1.11.0" }
+serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "serialization" }
+serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serialization" }
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 serviceloader = { id = "app.softwork.serviceloader-compiler", version = "0.0.24" }
 mavencentral = { id = "io.github.hfhbd.mavencentral", version = "0.0.23" }
 dokka = { id = "org.jetbrains.dokka", version = "2.2.0" }

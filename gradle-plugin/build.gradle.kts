@@ -15,11 +15,11 @@ java {
 }
 
 dependencies {
-    implementation(libs.plugins.kotlin.jvm.toDep())
+    compileOnly(libs.plugins.kotlin.jvm.toDep())
 }
 
 fun Provider<PluginDependency>.toDep() = map {
-    "${it.pluginId}:${it.pluginId}.gradle.plugin:${it.version}"
+    dependencyFactory.create("${it.pluginId}:${it.pluginId}.gradle.plugin:${it.version}")
 }
 
 tasks.validatePlugins {
@@ -38,8 +38,13 @@ gradlePlugin.plugins.register("validation") {
     description = "Validation Gradle Plugin"
 }
 
+val s = configurations.resolvable("s") {
+    dependencies.addLater(libs.plugins.kotlin.serialization.toDep())
+    dependencies.addLater(libs.plugins.kotlin.jvm.toDep())
+}
+
 tasks.pluginUnderTestMetadata {
-    pluginClasspath.from(configurations.runtimeClasspath)
+    pluginClasspath.from(s)
 }
 
 testing.suites.named("test", JvmTestSuite::class) {

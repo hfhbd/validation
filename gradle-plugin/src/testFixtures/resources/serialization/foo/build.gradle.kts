@@ -6,3 +6,7 @@ plugins {
 }
 
 application.mainClass.set("MainKt")
+
+dependencies {
+    implementation(libs.serialization.json)
+}
