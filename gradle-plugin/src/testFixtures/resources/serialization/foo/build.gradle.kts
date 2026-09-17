@@ -5,7 +5,7 @@ plugins {
     id("io.github.hfhbd.validation")
 }
 
-application.mainClass.set("MainKt")
+application.mainClass = "MainKt"
 
 dependencies {
     implementation(libs.serialization.json)
