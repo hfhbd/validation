@@ -1,4 +1,4 @@
-public final class app/softwork/validation/plugin/gradle/ValidationPlugin : org/jetbrains/kotlin/gradle/plugin/KotlinCompilerPluginSupportPlugin {
+public final class io/github/hfhbd/validation/plugin/gradle/ValidationPlugin : org/jetbrains/kotlin/gradle/plugin/KotlinCompilerPluginSupportPlugin {
 	public fun <init> ()V
 	public synthetic fun apply (Ljava/lang/Object;)V
 	public fun apply (Lorg/gradle/api/Project;)V

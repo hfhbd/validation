@@ -23,17 +23,17 @@ fun Provider<PluginDependency>.toDep() = map {
 }
 
 tasks.validatePlugins {
-    enableStricterValidation.set(true)
+    enableStricterValidation = true
 }
 
-val storeVersion by tasks.registering(StoreVersion::class)
+val storeVersion = tasks.register("storeVersion", StoreVersion::class)
 sourceSets.main {
     kotlin.srcDir(storeVersion)
 }
 
 gradlePlugin.plugins.register("validation") {
-    id = "app.softwork.validation"
-    implementationClass = "app.softwork.validation.plugin.gradle.ValidationPlugin"
+    id = "io.github.hfhbd.validation"
+    implementationClass = "io.github.hfhbd.validation.plugin.gradle.ValidationPlugin"
     displayName = "Validation Gradle Plugin"
     description = "Validation Gradle Plugin"
 }
@@ -54,9 +54,9 @@ testing.suites.named("test", JvmTestSuite::class) {
         testTask {
             environment("fixtureDir", project.file("src/testFixtures").path)
 
-            javaLauncher.set(javaToolchains.launcherFor {
-                languageVersion.set(JavaLanguageVersion.of(21))
-            })
+            javaLauncher = javaToolchains.launcherFor {
+                languageVersion = (JavaLanguageVersion.of(21))
+            }
         }
     }
 }

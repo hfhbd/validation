@@ -1,4 +1,4 @@
-import app.softwork.validation.*
+import io.github.hfhbd.validation.*
 import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 

@@ -39,7 +39,7 @@ FILE fqName:<root> fileName:/success.kt
                   ARG <this>: GET_VAR '<this>: <root>.A declared in <root>.A' type=<root>.A origin=null
               ARG arg1: CONST Int type=kotlin.Int value=2
             then: THROW type=kotlin.Nothing
-              CONSTRUCTOR_CALL 'public constructor <init> (message: kotlin.String) declared in app.softwork.validation.ValidationException' type=app.softwork.validation.ValidationException origin=null
+              CONSTRUCTOR_CALL 'public constructor <init> (message: kotlin.String) declared in io.github.hfhbd.validation.ValidationException' type=io.github.hfhbd.validation.ValidationException origin=null
                 ARG message: STRING_CONCATENATION type=kotlin.String
                   CONST String type=kotlin.String value="s.length >= "
                   CONST Int type=kotlin.Int value=2
@@ -54,7 +54,7 @@ FILE fqName:<root> fileName:/success.kt
                   ARG <this>: GET_VAR '<this>: <root>.A declared in <root>.A' type=<root>.A origin=null
               ARG arg1: CONST Int type=kotlin.Int value=4
             then: THROW type=kotlin.Nothing
-              CONSTRUCTOR_CALL 'public constructor <init> (message: kotlin.String) declared in app.softwork.validation.ValidationException' type=app.softwork.validation.ValidationException origin=null
+              CONSTRUCTOR_CALL 'public constructor <init> (message: kotlin.String) declared in io.github.hfhbd.validation.ValidationException' type=io.github.hfhbd.validation.ValidationException origin=null
                 ARG message: STRING_CONCATENATION type=kotlin.String
                   CONST String type=kotlin.String value="s.length <= "
                   CONST Int type=kotlin.Int value=4
@@ -79,7 +79,7 @@ FILE fqName:<root> fileName:/success.kt
                 if: CONST Boolean type=kotlin.Boolean value=true
                 then: CONST Boolean type=kotlin.Boolean value=false
             then: THROW type=kotlin.Nothing
-              CONSTRUCTOR_CALL 'public constructor <init> (message: kotlin.String) declared in app.softwork.validation.ValidationException' type=app.softwork.validation.ValidationException origin=null
+              CONSTRUCTOR_CALL 'public constructor <init> (message: kotlin.String) declared in io.github.hfhbd.validation.ValidationException' type=io.github.hfhbd.validation.ValidationException origin=null
                 ARG message: STRING_CONCATENATION type=kotlin.String
                   CONST String type=kotlin.String value="d.length >= "
                   CONST Int type=kotlin.Int value=2
@@ -104,7 +104,7 @@ FILE fqName:<root> fileName:/success.kt
                 if: CONST Boolean type=kotlin.Boolean value=true
                 then: CONST Boolean type=kotlin.Boolean value=false
             then: THROW type=kotlin.Nothing
-              CONSTRUCTOR_CALL 'public constructor <init> (message: kotlin.String) declared in app.softwork.validation.ValidationException' type=app.softwork.validation.ValidationException origin=null
+              CONSTRUCTOR_CALL 'public constructor <init> (message: kotlin.String) declared in io.github.hfhbd.validation.ValidationException' type=io.github.hfhbd.validation.ValidationException origin=null
                 ARG message: STRING_CONCATENATION type=kotlin.String
                   CONST String type=kotlin.String value="d.length <= "
                   CONST Int type=kotlin.Int value=4

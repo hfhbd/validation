@@ -1,4 +1,4 @@
-package app.softwork.validation.plugin.gradle
+package io.github.hfhbd.validation.plugin.gradle
 
 import org.gradle.api.provider.Provider
 import org.jetbrains.kotlin.gradle.plugin.KotlinCompilation
@@ -9,10 +9,10 @@ import org.jetbrains.kotlin.gradle.plugin.SubpluginOption
 public class ValidationPlugin : KotlinCompilerPluginSupportPlugin {
     override fun isApplicable(kotlinCompilation: KotlinCompilation<*>): Boolean = true
 
-    override fun getCompilerPluginId(): String = "app.softwork.validation"
+    override fun getCompilerPluginId(): String = "io.github.hfhbd.validation"
 
     override fun getPluginArtifact(): SubpluginArtifact = SubpluginArtifact(
-        groupId = "app.softwork.validation",
+        groupId = "io.github.hfhbd.validation",
         artifactId = "kotlin-plugin",
         version = VERSION,
     )
@@ -20,7 +20,7 @@ public class ValidationPlugin : KotlinCompilerPluginSupportPlugin {
     override fun applyToCompilation(kotlinCompilation: KotlinCompilation<*>): Provider<List<SubpluginOption>> {
         kotlinCompilation.defaultSourceSet {
             dependencies {
-                implementation("app.softwork.validation:runtime:$VERSION")
+                implementation("io.github.hfhbd.validation:runtime:$VERSION")
             }
         }
 

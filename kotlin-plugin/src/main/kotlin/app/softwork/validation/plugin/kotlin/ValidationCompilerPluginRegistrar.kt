@@ -1,8 +1,8 @@
-package app.softwork.validation.plugin.kotlin
+package io.github.hfhbd.validation.plugin.kotlin
 
-import app.softwork.serviceloader.*
-import app.softwork.validation.plugin.kotlin.fir.ValidationFirExtensionRegistrar
-import app.softwork.validation.plugin.kotlin.ir.ValidationInitExtensionRegistrar
+import io.github.hfhbd.serviceloader.ServiceLoader
+import io.github.hfhbd.validation.plugin.kotlin.fir.ValidationFirExtensionRegistrar
+import io.github.hfhbd.validation.plugin.kotlin.ir.ValidationInitExtensionRegistrar
 import org.jetbrains.kotlin.backend.common.extensions.*
 import org.jetbrains.kotlin.compiler.plugin.*
 import org.jetbrains.kotlin.config.*
@@ -18,7 +18,7 @@ public class ValidationCompilerPluginRegistrar : CompilerPluginRegistrar() {
     }
 
     internal companion object {
-        const val PLUGIN_ID = "app.softwork.validation"
+        const val PLUGIN_ID = "io.github.hfhbd.validation"
 
         internal fun ExtensionStorage.validation() {
             FirExtensionRegistrarAdapter.registerExtension(ValidationFirExtensionRegistrar)

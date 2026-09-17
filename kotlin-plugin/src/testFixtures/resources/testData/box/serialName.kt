@@ -1,4 +1,4 @@
-import app.softwork.validation.MinLength
+import io.github.hfhbd.validation.MinLength
 
 class A(
     @MinLength(2)

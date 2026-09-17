@@ -1,7 +1,7 @@
-package app.softwork.validation.plugin.kotlin
+package io.github.hfhbd.validation.plugin.kotlin
 
-import app.softwork.validation.plugin.kotlin.runners.AbstractJvmBoxTest
-import app.softwork.validation.plugin.kotlin.runners.AbstractJvmDiagnosticTest
+import io.github.hfhbd.validation.plugin.kotlin.runners.AbstractJvmBoxTest
+import io.github.hfhbd.validation.plugin.kotlin.runners.AbstractJvmDiagnosticTest
 import org.jetbrains.kotlin.generators.dsl.junit5.generateTestGroupSuiteWithJUnit5
 
 fun main() {

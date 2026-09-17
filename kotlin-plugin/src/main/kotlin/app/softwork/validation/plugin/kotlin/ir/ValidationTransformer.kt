@@ -1,4 +1,4 @@
-package app.softwork.validation.plugin.kotlin.ir
+package io.github.hfhbd.validation.plugin.kotlin.ir
 
 import org.jetbrains.kotlin.GeneratedDeclarationKey
 import org.jetbrains.kotlin.backend.common.extensions.IrPluginContext
@@ -33,7 +33,7 @@ import org.jetbrains.kotlin.ir.util.isNullable
 import org.jetbrains.kotlin.ir.types.isString
 import org.jetbrains.kotlin.ir.util.constructors
 import org.jetbrains.kotlin.ir.util.getAnnotation
-import org.jetbrains.kotlin.ir.util.getAnnotationStringValue
+import org.jetbrains.kotlin.ir.util.getConstArgument
 import org.jetbrains.kotlin.ir.util.getPropertyGetter
 import org.jetbrains.kotlin.ir.util.parentClassOrNull
 import org.jetbrains.kotlin.ir.util.toIrConst
@@ -42,12 +42,12 @@ import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.FqName
 
 internal class ValidationTransformer(private val pluginContext: IrPluginContext) : IrElementTransformerVoid() {
-    private val MinLength = AnnotationFqn("app.softwork.validation.MinLength")
-    private val MaxLength = AnnotationFqn("app.softwork.validation.MaxLength")
+    private val MinLength = AnnotationFqn("io.github.hfhbd.validation.MinLength")
+    private val MaxLength = AnnotationFqn("io.github.hfhbd.validation.MaxLength")
     private val SerialName = AnnotationFqn("kotlinx.serialization.SerialName")
 
     private val validationExceptionSymbol: IrClassSymbol? =
-        pluginContext.finderForBuiltins().findClass(ClassId(FqName("app.softwork.validation"), FqName("ValidationException"), false))
+        pluginContext.finderForBuiltins().findClass(ClassId(FqName("io.github.hfhbd.validation"), FqName("ValidationException"), false))
     private val unit = pluginContext.irBuiltIns.unitClass
     private val unitType = pluginContext.irBuiltIns.unitType
     private val booleanType = pluginContext.irBuiltIns.booleanType
@@ -105,7 +105,7 @@ internal class ValidationTransformer(private val pluginContext: IrPluginContext)
     }
 
     private fun IrProperty.getSerialName(): String? {
-        return getAnnotation(SerialName)?.getAnnotationStringValue()
+        return getAnnotation(SerialName)?.getConstArgument<String>("value")
     }
 
     private fun IrConstructorCall.addInit(

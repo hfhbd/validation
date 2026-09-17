@@ -1,6 +1,6 @@
-package app.softwork.validation.plugin.kotlin.fir
+package io.github.hfhbd.validation.plugin.kotlin.fir
 
-import app.softwork.validation.plugin.kotlin.fir.ValidationPredicateMatchingService.Companion.validationPredicateMatchingService
+import io.github.hfhbd.validation.plugin.kotlin.fir.ValidationPredicateMatchingService.Companion.validationPredicateMatchingService
 import org.jetbrains.kotlin.build.deserializeFromPlainText
 import org.jetbrains.kotlin.diagnostics.DiagnosticReporter
 import org.jetbrains.kotlin.diagnostics.reportOn

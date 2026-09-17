@@ -1,4 +1,4 @@
-package app.softwork.validation.plugin.kotlin.fir
+package io.github.hfhbd.validation.plugin.kotlin.fir
 
 import org.jetbrains.kotlin.diagnostics.KtDiagnosticFactoryToRendererMap
 import org.jetbrains.kotlin.diagnostics.rendering.BaseDiagnosticRendererFactory

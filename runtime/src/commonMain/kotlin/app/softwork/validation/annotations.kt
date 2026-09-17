@@ -1,4 +1,4 @@
-package app.softwork.validation
+package io.github.hfhbd.validation
 
 @MustBeDocumented
 @Target(AnnotationTarget.PROPERTY)

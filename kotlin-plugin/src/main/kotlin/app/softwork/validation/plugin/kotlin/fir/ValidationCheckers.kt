@@ -1,4 +1,4 @@
-package app.softwork.validation.plugin.kotlin.fir
+package io.github.hfhbd.validation.plugin.kotlin.fir
 
 import org.jetbrains.kotlin.fir.FirSession
 import org.jetbrains.kotlin.fir.analysis.checkers.declaration.DeclarationCheckers

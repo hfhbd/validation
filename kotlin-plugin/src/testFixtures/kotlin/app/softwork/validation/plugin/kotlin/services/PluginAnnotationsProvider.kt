@@ -1,4 +1,4 @@
-package app.softwork.validation.plugin.kotlin.services
+package io.github.hfhbd.validation.plugin.kotlin.services
 
 import org.jetbrains.kotlin.cli.jvm.config.addJvmClasspathRoot
 import org.jetbrains.kotlin.config.CompilerConfiguration

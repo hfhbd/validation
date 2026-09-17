@@ -5,24 +5,24 @@
 // - Show manifest properties: true
 // - Show declarations: true
 
-// Library unique name: <app.softwork.validation:runtime>
-open annotation class app.softwork.validation/MaxLength : kotlin/Annotation { // app.softwork.validation/MaxLength|null[0]
-    constructor <init>(kotlin/Int) // app.softwork.validation/MaxLength.<init>|<init>(kotlin.Int){}[0]
+// Library unique name: <io.github.hfhbd.validation:runtime>
+open annotation class io.github.hfhbd.validation/MaxLength : kotlin/Annotation { // io.github.hfhbd.validation/MaxLength|null[0]
+    constructor <init>(kotlin/Int) // io.github.hfhbd.validation/MaxLength.<init>|<init>(kotlin.Int){}[0]
 
-    final val inclusive // app.softwork.validation/MaxLength.inclusive|{}inclusive[0]
-        final fun <get-inclusive>(): kotlin/Int // app.softwork.validation/MaxLength.inclusive.<get-inclusive>|<get-inclusive>(){}[0]
+    final val inclusive // io.github.hfhbd.validation/MaxLength.inclusive|{}inclusive[0]
+        final fun <get-inclusive>(): kotlin/Int // io.github.hfhbd.validation/MaxLength.inclusive.<get-inclusive>|<get-inclusive>(){}[0]
 }
 
-open annotation class app.softwork.validation/MinLength : kotlin/Annotation { // app.softwork.validation/MinLength|null[0]
-    constructor <init>(kotlin/Int) // app.softwork.validation/MinLength.<init>|<init>(kotlin.Int){}[0]
+open annotation class io.github.hfhbd.validation/MinLength : kotlin/Annotation { // io.github.hfhbd.validation/MinLength|null[0]
+    constructor <init>(kotlin/Int) // io.github.hfhbd.validation/MinLength.<init>|<init>(kotlin.Int){}[0]
 
-    final val inclusive // app.softwork.validation/MinLength.inclusive|{}inclusive[0]
-        final fun <get-inclusive>(): kotlin/Int // app.softwork.validation/MinLength.inclusive.<get-inclusive>|<get-inclusive>(){}[0]
+    final val inclusive // io.github.hfhbd.validation/MinLength.inclusive|{}inclusive[0]
+        final fun <get-inclusive>(): kotlin/Int // io.github.hfhbd.validation/MinLength.inclusive.<get-inclusive>|<get-inclusive>(){}[0]
 }
 
-final class app.softwork.validation/ValidationException : kotlin/IllegalArgumentException { // app.softwork.validation/ValidationException|null[0]
-    constructor <init>(kotlin/String) // app.softwork.validation/ValidationException.<init>|<init>(kotlin.String){}[0]
+final class io.github.hfhbd.validation/ValidationException : kotlin/IllegalArgumentException { // io.github.hfhbd.validation/ValidationException|null[0]
+    constructor <init>(kotlin/String) // io.github.hfhbd.validation/ValidationException.<init>|<init>(kotlin.String){}[0]
 
-    final val message // app.softwork.validation/ValidationException.message|{}message[0]
-        final fun <get-message>(): kotlin/String // app.softwork.validation/ValidationException.message.<get-message>|<get-message>(){}[0]
+    final val message // io.github.hfhbd.validation/ValidationException.message|{}message[0]
+        final fun <get-message>(): kotlin/String // io.github.hfhbd.validation/ValidationException.message.<get-message>|<get-message>(){}[0]
 }
