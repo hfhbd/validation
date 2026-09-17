@@ -33,7 +33,7 @@ import org.jetbrains.kotlin.ir.util.isNullable
 import org.jetbrains.kotlin.ir.types.isString
 import org.jetbrains.kotlin.ir.util.constructors
 import org.jetbrains.kotlin.ir.util.getAnnotation
-import org.jetbrains.kotlin.ir.util.getAnnotationStringValue
+import org.jetbrains.kotlin.ir.util.getConstArgument
 import org.jetbrains.kotlin.ir.util.getPropertyGetter
 import org.jetbrains.kotlin.ir.util.parentClassOrNull
 import org.jetbrains.kotlin.ir.util.toIrConst
@@ -105,7 +105,7 @@ internal class ValidationTransformer(private val pluginContext: IrPluginContext)
     }
 
     private fun IrProperty.getSerialName(): String? {
-        return getAnnotation(SerialName)?.getAnnotationStringValue()
+        return getAnnotation(SerialName)?.getConstArgument<String>("value")
     }
 
     private fun IrConstructorCall.addInit(

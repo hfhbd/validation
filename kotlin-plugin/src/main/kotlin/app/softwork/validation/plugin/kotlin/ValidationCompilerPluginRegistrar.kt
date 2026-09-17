@@ -1,6 +1,6 @@
 package io.github.hfhbd.validation.plugin.kotlin
 
-import io.github.hfhbd.serviceloader.*
+import io.github.hfhbd.serviceloader.ServiceLoader
 import io.github.hfhbd.validation.plugin.kotlin.fir.ValidationFirExtensionRegistrar
 import io.github.hfhbd.validation.plugin.kotlin.ir.ValidationInitExtensionRegistrar
 import org.jetbrains.kotlin.backend.common.extensions.*
