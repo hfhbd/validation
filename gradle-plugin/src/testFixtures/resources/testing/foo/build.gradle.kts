@@ -5,4 +5,4 @@ plugins {
     id("app.softwork.validation")
 }
 
-application.mainClass.set("MainKt")
+application.mainClass = "MainKt"

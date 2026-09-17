@@ -13,8 +13,8 @@ tasks.jvmJar {
 }
 
 tasks.named<JavaCompile>("compileJava9Java") {
-    javaCompiler.set(javaToolchains.compilerFor {})
-    options.release.set(9)
+    javaCompiler = javaToolchains.compilerFor {}
+    options.release = 9
 
     options.compilerArgumentProviders += object : CommandLineArgumentProvider {
 

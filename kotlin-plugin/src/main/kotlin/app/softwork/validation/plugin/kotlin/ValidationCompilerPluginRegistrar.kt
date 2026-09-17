@@ -1,6 +1,6 @@
 package app.softwork.validation.plugin.kotlin
 
-import app.softwork.serviceloader.*
+import io.github.hfhbd.serviceloader.*
 import app.softwork.validation.plugin.kotlin.fir.ValidationFirExtensionRegistrar
 import app.softwork.validation.plugin.kotlin.ir.ValidationInitExtensionRegistrar
 import org.jetbrains.kotlin.backend.common.extensions.*

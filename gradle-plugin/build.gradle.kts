@@ -23,10 +23,10 @@ fun Provider<PluginDependency>.toDep() = map {
 }
 
 tasks.validatePlugins {
-    enableStricterValidation.set(true)
+    enableStricterValidation = true
 }
 
-val storeVersion by tasks.registering(StoreVersion::class)
+val storeVersion = tasks.register("storeVersion", StoreVersion::class)
 sourceSets.main {
     kotlin.srcDir(storeVersion)
 }
@@ -54,9 +54,9 @@ testing.suites.named("test", JvmTestSuite::class) {
         testTask {
             environment("fixtureDir", project.file("src/testFixtures").path)
 
-            javaLauncher.set(javaToolchains.launcherFor {
-                languageVersion.set(JavaLanguageVersion.of(21))
-            })
+            javaLauncher = javaToolchains.launcherFor {
+                languageVersion = (JavaLanguageVersion.of(21))
+            }
         }
     }
 }

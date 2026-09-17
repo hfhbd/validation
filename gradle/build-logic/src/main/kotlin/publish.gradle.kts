@@ -7,26 +7,26 @@ plugins {
 publishing {
     publications.withType<MavenPublication>().configureEach {
         pom {
-            name.set("app.softwork Validation")
-            description.set("Validation")
-            url.set("https://github.com/hfhbd/validation")
+            name = "app.softwork Validation"
+            description = "Validation"
+            url = "https://github.com/hfhbd/validation"
             licenses {
                 license {
-                    name.set("Apache-2.0")
-                    url.set("https://www.apache.org/licenses/LICENSE-2.0.txt")
+                    name = "Apache-2.0"
+                    url = "https://www.apache.org/licenses/LICENSE-2.0.txt"
                 }
             }
             developers {
                 developer {
-                    id.set("hfhbd")
-                    name.set("Philip Wedemann")
-                    email.set("mybztg+mavencentral@icloud.com")
+                    id = "hfhbd"
+                    name = "Philip Wedemann"
+                    email = "mybztg+mavencentral@icloud.com"
                 }
             }
             scm {
-                connection.set("scm:git://github.com/hfhbd/validation.git")
-                developerConnection.set("scm:git://github.com/hfhbd/validation.git")
-                url.set("https://github.com/hfhbd/validation")
+                connection = "scm:git://github.com/hfhbd/validation.git"
+                developerConnection = "scm:git://github.com/hfhbd/validation.git"
+                url = "https://github.com/hfhbd/validation"
             }
         }
     }
