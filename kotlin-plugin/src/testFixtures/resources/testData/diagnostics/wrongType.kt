@@ -1,7 +1,7 @@
 // RUN_PIPELINE_TILL: FRONTEND
 
-import app.softwork.validation.MinLength
-import app.softwork.validation.MaxLength
+import io.github.hfhbd.validation.MinLength
+import io.github.hfhbd.validation.MaxLength
 
 data class A(
     @MinLength(2)

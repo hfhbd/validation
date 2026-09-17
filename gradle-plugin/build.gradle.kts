@@ -32,8 +32,8 @@ sourceSets.main {
 }
 
 gradlePlugin.plugins.register("validation") {
-    id = "app.softwork.validation"
-    implementationClass = "app.softwork.validation.plugin.gradle.ValidationPlugin"
+    id = "io.github.hfhbd.validation"
+    implementationClass = "io.github.hfhbd.validation.plugin.gradle.ValidationPlugin"
     displayName = "Validation Gradle Plugin"
     description = "Validation Gradle Plugin"
 }

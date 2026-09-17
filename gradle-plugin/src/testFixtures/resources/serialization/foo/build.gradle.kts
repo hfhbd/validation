@@ -2,7 +2,7 @@ plugins {
     kotlin("jvm")
     kotlin("plugin.serialization")
     id("application")
-    id("app.softwork.validation")
+    id("io.github.hfhbd.validation")
 }
 
 application.mainClass.set("MainKt")

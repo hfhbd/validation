@@ -1,4 +1,4 @@
-import app.softwork.validation.*
+import io.github.hfhbd.validation.*
 
 fun main(vararg args: String) {
     println(args[0])

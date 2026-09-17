@@ -27,7 +27,7 @@ abstract class StoreVersion : DefaultTask() {
         packageDir.mkdirs()
         File(packageDir, "Version.kt").writeText(
             """
-            |package app.softwork.validation.plugin.gradle
+            |package io.github.hfhbd.validation.plugin.gradle
             |
             |internal val VERSION: String = "${version.get()}"
             |

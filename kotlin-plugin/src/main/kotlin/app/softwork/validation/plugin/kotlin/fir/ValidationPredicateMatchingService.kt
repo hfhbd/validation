@@ -1,4 +1,4 @@
-package app.softwork.validation.plugin.kotlin.fir
+package io.github.hfhbd.validation.plugin.kotlin.fir
 
 import org.jetbrains.kotlin.fir.FirSession
 import org.jetbrains.kotlin.fir.extensions.FirDeclarationPredicateRegistrar
@@ -11,10 +11,10 @@ import org.jetbrains.kotlin.name.FqName
 
 internal class ValidationPredicateMatchingService(session: FirSession) : FirExtensionSessionComponent(session) {
     companion object {
-        val minLengthFq = FqName("app.softwork.validation.MinLength")
+        val minLengthFq = FqName("io.github.hfhbd.validation.MinLength")
         val minLengthClassId = ClassId.Companion.topLevel(minLengthFq)
 
-        val maxLengthFq = FqName("app.softwork.validation.MaxLength")
+        val maxLengthFq = FqName("io.github.hfhbd.validation.MaxLength")
         val maxLengthClassId = ClassId.Companion.topLevel(maxLengthFq)
 
         val minLengthPredicate = LookupPredicate.Companion.create {

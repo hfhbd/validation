@@ -1,5 +1,5 @@
-module app.softwork.validation.runtime {
-    exports app.softwork.validation;
+module io.github.hfhbd.validation.runtime {
+    exports io.github.hfhbd.validation;
 
     requires kotlin.stdlib;
 }

@@ -1,4 +1,4 @@
-package app.softwork.validation.plugin.gradle
+package io.github.hfhbd.validation.plugin.gradle
 
 import org.gradle.testkit.runner.*
 import java.nio.file.*
@@ -33,7 +33,7 @@ class IntegrationTest {
             TaskOutcome.FAILED,
             result?.outcome,
         )
-        assertTrue("""app.softwork.validation.ValidationException: a.length >= 2, was a""" in buildResult.output)
+        assertTrue("""io.github.hfhbd.validation.ValidationException: a.length >= 2, was a""" in buildResult.output)
         assertTrue("""at A.<init>(main.kt:11)""" in buildResult.output)
     }
 
@@ -47,7 +47,7 @@ class IntegrationTest {
             TaskOutcome.FAILED,
             result?.outcome,
         )
-        assertTrue("""app.softwork.validation.ValidationException: a.length >= 2, was 1""" in buildResult.output)
+        assertTrue("""io.github.hfhbd.validation.ValidationException: a.length >= 2, was 1""" in buildResult.output)
         assertTrue("""at A.<init>(main.kt:13)""" in buildResult.output)
     }
 
@@ -61,7 +61,7 @@ class IntegrationTest {
             TaskOutcome.FAILED,
             result?.outcome,
         )
-        assertTrue("""app.softwork.validation.ValidationException: a.length <= 4, was 123456""" in buildResult.output)
+        assertTrue("""io.github.hfhbd.validation.ValidationException: a.length <= 4, was 123456""" in buildResult.output)
         assertTrue("""at A.<init>(main.kt:14)""" in buildResult.output)
     }
 
@@ -75,7 +75,7 @@ class IntegrationTest {
             TaskOutcome.FAILED,
             result?.outcome,
         )
-        assertTrue("""app.softwork.validation.ValidationException: b.length >= 2, was a""" in buildResult.output)
+        assertTrue("""io.github.hfhbd.validation.ValidationException: b.length >= 2, was a""" in buildResult.output)
         assertTrue("""at A.<init>(main.kt:17)""" in buildResult.output)
     }
 
@@ -89,7 +89,7 @@ class IntegrationTest {
             TaskOutcome.FAILED,
             result?.outcome,
         )
-        assertTrue("""app.softwork.validation.ValidationException: b.length <= 4, was abcdef""" in buildResult.output)
+        assertTrue("""io.github.hfhbd.validation.ValidationException: b.length <= 4, was abcdef""" in buildResult.output)
         assertTrue("""at A.<init>(main.kt:18)""" in buildResult.output)
     }
 

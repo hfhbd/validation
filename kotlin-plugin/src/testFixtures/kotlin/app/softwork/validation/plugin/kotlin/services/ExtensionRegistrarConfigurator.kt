@@ -1,6 +1,6 @@
-package app.softwork.validation.plugin.kotlin.services
+package io.github.hfhbd.validation.plugin.kotlin.services
 
-import app.softwork.validation.plugin.kotlin.ValidationCompilerPluginRegistrar.Companion.validation
+import io.github.hfhbd.validation.plugin.kotlin.ValidationCompilerPluginRegistrar.Companion.validation
 import org.jetbrains.kotlin.compiler.plugin.CompilerPluginRegistrar
 import org.jetbrains.kotlin.config.CompilerConfiguration
 import org.jetbrains.kotlin.test.model.TestModule

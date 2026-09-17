@@ -7,7 +7,7 @@ plugins {
 publishing {
     publications.withType<MavenPublication>().configureEach {
         pom {
-            name = "app.softwork Validation"
+            name = "hfhbd Validation"
             description = "Validation"
             url = "https://github.com/hfhbd/validation"
             licenses {

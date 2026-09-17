@@ -1,6 +1,6 @@
-import app.softwork.validation.MinLength
-import app.softwork.validation.MaxLength
-import app.softwork.validation.ValidationException
+import io.github.hfhbd.validation.MinLength
+import io.github.hfhbd.validation.MaxLength
+import io.github.hfhbd.validation.ValidationException
 
 class A(
     @MinLength(2) @property:MaxLength(4) val s: String,

@@ -34,7 +34,7 @@ FILE fqName:<root> fileName:/noAnnotation.kt
               ARG arg1: CONST Int type=kotlin.Int value=2
             then: BLOCK type=kotlin.Unit origin=null
               THROW type=kotlin.Nothing
-                CONSTRUCTOR_CALL 'public constructor <init> (message: kotlin.String) declared in app.softwork.validation.ValidationException' type=app.softwork.validation.ValidationException origin=null
+                CONSTRUCTOR_CALL 'public constructor <init> (message: kotlin.String) declared in io.github.hfhbd.validation.ValidationException' type=io.github.hfhbd.validation.ValidationException origin=null
                   ARG message: CALL 'public final fun plus (other: kotlin.Any?): kotlin.String declared in kotlin.String' type=kotlin.String origin=PLUS
                     ARG <this>: CONST String type=kotlin.String value="s.length >= 2, was "
                     ARG other: CALL 'public final fun <get-s> (): kotlin.String declared in <root>.A' type=kotlin.String origin=GET_PROPERTY
@@ -48,7 +48,7 @@ FILE fqName:<root> fileName:/noAnnotation.kt
               ARG arg1: CONST Int type=kotlin.Int value=4
             then: BLOCK type=kotlin.Unit origin=null
               THROW type=kotlin.Nothing
-                CONSTRUCTOR_CALL 'public constructor <init> (message: kotlin.String) declared in app.softwork.validation.ValidationException' type=app.softwork.validation.ValidationException origin=null
+                CONSTRUCTOR_CALL 'public constructor <init> (message: kotlin.String) declared in io.github.hfhbd.validation.ValidationException' type=io.github.hfhbd.validation.ValidationException origin=null
                   ARG message: CALL 'public final fun plus (other: kotlin.Any?): kotlin.String declared in kotlin.String' type=kotlin.String origin=PLUS
                     ARG <this>: CONST String type=kotlin.String value="s.length <= 4, was "
                     ARG other: CALL 'public final fun <get-s> (): kotlin.String declared in <root>.A' type=kotlin.String origin=GET_PROPERTY
@@ -73,7 +73,7 @@ FILE fqName:<root> fileName:/noAnnotation.kt
                 then: CONST Boolean type=kotlin.Boolean value=false
             then: BLOCK type=kotlin.Unit origin=null
               THROW type=kotlin.Nothing
-                CONSTRUCTOR_CALL 'public constructor <init> (message: kotlin.String) declared in app.softwork.validation.ValidationException' type=app.softwork.validation.ValidationException origin=null
+                CONSTRUCTOR_CALL 'public constructor <init> (message: kotlin.String) declared in io.github.hfhbd.validation.ValidationException' type=io.github.hfhbd.validation.ValidationException origin=null
                   ARG message: CALL 'public final fun plus (other: kotlin.Any?): kotlin.String declared in kotlin.String' type=kotlin.String origin=PLUS
                     ARG <this>: CONST String type=kotlin.String value="d.length >= 2, was "
                     ARG other: TYPE_OP type=kotlin.String origin=IMPLICIT_CAST typeOperand=kotlin.String
@@ -99,7 +99,7 @@ FILE fqName:<root> fileName:/noAnnotation.kt
                 then: CONST Boolean type=kotlin.Boolean value=false
             then: BLOCK type=kotlin.Unit origin=null
               THROW type=kotlin.Nothing
-                CONSTRUCTOR_CALL 'public constructor <init> (message: kotlin.String) declared in app.softwork.validation.ValidationException' type=app.softwork.validation.ValidationException origin=null
+                CONSTRUCTOR_CALL 'public constructor <init> (message: kotlin.String) declared in io.github.hfhbd.validation.ValidationException' type=io.github.hfhbd.validation.ValidationException origin=null
                   ARG message: CALL 'public final fun plus (other: kotlin.Any?): kotlin.String declared in kotlin.String' type=kotlin.String origin=PLUS
                     ARG <this>: CONST String type=kotlin.String value="d.length <= 4, was "
                     ARG other: TYPE_OP type=kotlin.String origin=IMPLICIT_CAST typeOperand=kotlin.String

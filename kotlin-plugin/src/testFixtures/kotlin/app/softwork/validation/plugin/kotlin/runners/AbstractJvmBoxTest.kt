@@ -1,7 +1,7 @@
-package app.softwork.validation.plugin.kotlin.runners
+package io.github.hfhbd.validation.plugin.kotlin.runners
 
-import app.softwork.validation.plugin.kotlin.services.ExtensionRegistrarConfigurator
-import app.softwork.validation.plugin.kotlin.services.PluginAnnotationsProvider
+import io.github.hfhbd.validation.plugin.kotlin.services.ExtensionRegistrarConfigurator
+import io.github.hfhbd.validation.plugin.kotlin.services.PluginAnnotationsProvider
 import org.jetbrains.kotlin.test.FirParser
 import org.jetbrains.kotlin.test.builders.TestConfigurationBuilder
 import org.jetbrains.kotlin.test.directives.CodegenTestDirectives

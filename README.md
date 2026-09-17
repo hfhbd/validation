@@ -3,8 +3,8 @@
 A compiler plugin to validate the length of String properties.
 
 ```kotlin
-import app.softwork.validation.MinLength
-import app.softwork.validation.MaxLength
+import io.github.hfhbd.validation.MinLength
+import io.github.hfhbd.validation.MaxLength
 
 class A(
     @MinLength(inclusive = 2)
@@ -32,7 +32,7 @@ The gradle plugin is uploaded to MavenCentral. The runtime supports all targets.
 
 ```kotlin
 plugins {
-    id("app.softwork.validation") version "LATEST"
+    id("io.github.hfhbd.validation") version "LATEST"
 }
 
 repositories {

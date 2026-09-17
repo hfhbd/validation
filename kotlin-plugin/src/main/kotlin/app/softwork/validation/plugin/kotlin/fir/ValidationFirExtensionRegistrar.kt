@@ -1,4 +1,4 @@
-package app.softwork.validation.plugin.kotlin.fir
+package io.github.hfhbd.validation.plugin.kotlin.fir
 
 import org.jetbrains.kotlin.fir.extensions.FirExtensionRegistrar
 
