@@ -5,6 +5,12 @@ plugins {
 }
 
 publishing {
+    repositories {
+        maven(url = "https://maven.pkg.github.com/hfhbd/validation") {
+            name = "GitHubPackages"
+            credentials(PasswordCredentials::class)
+        }
+    }
     publications.withType<MavenPublication>().configureEach {
         pom {
             name = "hfhbd Validation"
