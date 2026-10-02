@@ -9,7 +9,7 @@ serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-jso
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-serviceloader = { id = "io.github.hfhbd.serviceloader", version = "0.0.26" }
+serviceloader = { id = "io.github.hfhbd.serviceloader", version = "0.0.27" }
 mavencentral = { id = "io.github.hfhbd.mavencentral", version = "0.0.26" }
 dokka = { id = "org.jetbrains.dokka", version = "2.2.0" }
 kotlin-compiler-testing = { id = "io.github.hfhbd.kotlin-compiler-testing", version = "0.0.4" }
